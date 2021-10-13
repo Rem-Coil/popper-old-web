@@ -30,6 +30,22 @@ class _Service implements Service {
     return value;
   }
 
+  @override
+  Future<AddedTask> postTask(map) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(map);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AddedTask>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/task',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AddedTask.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -92,10 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               .map(
                                 (bobina) => DataRow(
                                   cells: <DataCell>[
-                                    DataCell(Text(bobina.nameOfTask)),
-                                    DataCell(Text(bobina.numberOfTask)),
-                                    DataCell(Text(
-                                        bobina.numberOfBobinas.toString())),
+                                    DataCell(Text(bobina.taskName)),
+                                    DataCell(Text(bobina.taskNumber)),
+                                    DataCell(Text(bobina.quantity.toString())),
                                     DataCell(Text(bobina.winding.toString())),
                                     DataCell(Text(bobina.output.toString())),
                                     DataCell(Text(bobina.isolation.toString())),
@@ -106,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     DataCell(ElevatedButton(
                                       child: Text('More information'),
                                       onPressed: () {
-                                        print('button ${bobina.nameOfTask}');
+                                        print('button ${bobina.taskName}');
                                       },
                                     ))
                                   ],

@@ -8,4 +8,14 @@ class TaskRepository {
     print('List is gotten');
     return list;
   }
+
+  Future<TaskBobina> addTask(AddedTask task) async {
+    final service = ApiProvider().getApiService();
+    final newTask = await service.postTask(task.toJson());
+    print('task added');
+    return TaskBobina(
+        taskName: newTask.taskName,
+        taskNumber: newTask.taskNumber,
+        quantity: newTask.quantity);
+  }
 }

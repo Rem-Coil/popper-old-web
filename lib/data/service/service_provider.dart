@@ -19,12 +19,14 @@ class ApiProvider {
   }
 
   Service getApiService() {
-    // _dio.interceptors.add(LogInterceptor(
-    //   logPrint: _logPrint,
-    //   request: false,
-    //   requestHeader: false,
-    //   responseBody: false,
-    // ));
+    _dio.interceptors.add(LogInterceptor(
+      logPrint: _logPrint,
+      request: true,
+      requestHeader: true,
+      responseBody: true,
+      requestBody: true,
+      responseHeader: true,
+    ));
 
     return Service(_dio, baseUrl: baseUrl);
   }

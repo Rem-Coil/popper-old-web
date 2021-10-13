@@ -4,9 +4,11 @@ part 'model.g.dart';
 
 @JsonSerializable()
 class TaskBobina {
-  final String nameOfTask;
-  final String numberOfTask;
-  final int numberOfBobinas;
+  @JsonKey(name: 'task_name')
+  final String taskName;
+  @JsonKey(name: 'task_number')
+  final String taskNumber;
+  final int quantity;
   final int winding;
   final int output;
   final int isolation;
@@ -16,9 +18,9 @@ class TaskBobina {
   final int testing;
 
   TaskBobina({
-    required this.nameOfTask,
-    required this.numberOfTask,
-    required this.numberOfBobinas,
+    required this.taskName,
+    required this.taskNumber,
+    required this.quantity,
     this.winding = 0,
     this.output = 0,
     this.isolation = 0,
@@ -32,4 +34,24 @@ class TaskBobina {
       _$TaskBobinaFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskBobinaToJson(this);
+}
+
+@JsonSerializable()
+class AddedTask {
+  @JsonKey(name: 'task_name')
+  final String taskName;
+  @JsonKey(name: 'task_number')
+  final String taskNumber;
+  final int quantity;
+
+  AddedTask({
+    required this.taskName,
+    required this.taskNumber,
+    required this.quantity,
+  });
+
+  factory AddedTask.fromJson(Map<String, dynamic> json) =>
+      _$AddedTaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddedTaskToJson(this);
 }

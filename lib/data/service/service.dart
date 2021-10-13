@@ -10,4 +10,7 @@ abstract class Service {
 
   @GET('/task')
   Future<List<TaskBobina>> getTable();
+
+  @POST('/task')
+  Future<AddedTask> postTask(@Body() Map<String, dynamic> map);
 }

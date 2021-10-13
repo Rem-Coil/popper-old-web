@@ -8,9 +8,9 @@ part of 'model.dart';
 
 TaskBobina _$TaskBobinaFromJson(Map<String, dynamic> json) {
   return TaskBobina(
-    nameOfTask: json['nameOfTask'] as String,
-    numberOfTask: json['numberOfTask'] as String,
-    numberOfBobinas: json['numberOfBobinas'] as int,
+    taskName: json['task_name'] as String,
+    taskNumber: json['task_number'] as String,
+    quantity: json['quantity'] as int,
     winding: json['winding'] as int,
     output: json['output'] as int,
     isolation: json['isolation'] as int,
@@ -23,9 +23,9 @@ TaskBobina _$TaskBobinaFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$TaskBobinaToJson(TaskBobina instance) =>
     <String, dynamic>{
-      'nameOfTask': instance.nameOfTask,
-      'numberOfTask': instance.numberOfTask,
-      'numberOfBobinas': instance.numberOfBobinas,
+      'task_name': instance.taskName,
+      'task_number': instance.taskNumber,
+      'quantity': instance.quantity,
       'winding': instance.winding,
       'output': instance.output,
       'isolation': instance.isolation,
@@ -33,4 +33,18 @@ Map<String, dynamic> _$TaskBobinaToJson(TaskBobina instance) =>
       'crimping': instance.crimping,
       'quality': instance.quality,
       'testing': instance.testing,
+    };
+
+AddedTask _$AddedTaskFromJson(Map<String, dynamic> json) {
+  return AddedTask(
+    taskName: json['task_name'] as String,
+    taskNumber: json['task_number'] as String,
+    quantity: json['quantity'] as int,
+  );
+}
+
+Map<String, dynamic> _$AddedTaskToJson(AddedTask instance) => <String, dynamic>{
+      'task_name': instance.taskName,
+      'task_number': instance.taskNumber,
+      'quantity': instance.quantity,
     };
