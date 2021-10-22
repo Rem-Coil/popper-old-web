@@ -26,27 +26,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: Icon(Icons.replay),
+              onPressed: () {
+                BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
+              },
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
-              // Align(
-              //   child: Row(
-              //     children: [
-              //       Spacer(),
-              //       Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: ElevatedButton(
-              //           onPressed: () {},
-              //           child: Text(
-              //             'Добавить задание',
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               NewTaskForm(),
               Expanded(
                 child: SingleChildScrollView(
@@ -117,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
