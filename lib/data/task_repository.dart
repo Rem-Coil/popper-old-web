@@ -1,5 +1,6 @@
 import 'package:popper/data/service/service_provider.dart';
 import 'package:popper/models/model.dart';
+import 'package:popper/models/added_task.dart';
 
 class TaskRepository {
   Future<List<TaskBobina>> getTasks() async {
