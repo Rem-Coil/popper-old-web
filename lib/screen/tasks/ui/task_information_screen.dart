@@ -9,26 +9,31 @@ import 'package:popper/screen/tasks/bloc/task_information_state.dart';
 import 'package:popper/widgets/new_task_form.dart';
 
 class InformationPage extends StatefulWidget {
-  InformationPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  static const route = '/taskInfo';
+  InformationPage({Key? key}) : super(key: key);
 
   @override
   _InformationPageState createState() => _InformationPageState();
 }
 
 class _InformationPageState extends State<InformationPage> {
+  late int id;
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<TaskInformationBloc>(context).add(ShowTaskInformation('7'));
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      id = ModalRoute.of(context)!.settings.arguments as int;
+      BlocProvider.of<TaskInformationBloc>(context)
+          .add(ShowTaskInformation(id));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Title'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),
@@ -36,7 +41,7 @@ class _InformationPageState extends State<InformationPage> {
               icon: Icon(Icons.replay),
               onPressed: () {
                 BlocProvider.of<TaskInformationBloc>(context)
-                    .add(ShowTaskInformation('7'));
+                    .add(ShowTaskInformation(id));
               },
             ),
           ),

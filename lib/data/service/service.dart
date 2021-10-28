@@ -18,8 +18,8 @@ abstract class Service {
   Future<AddedTask> postTask(@Body() Map<String, dynamic> map);
 
   @GET('/action/{id}')
-  Future<List<Action>> getActions(@Path("id") String id);
+  Future<List<Action>> getActions(@Path("id") int id);
 
   @GET('/bobbin/{id}')
-  Future<List<BobbinInformation>> getBobbinInformation(@Path("id") String id);
+  Future<List<BobbinInformation>> getBobbinInformation(@Path("id") int id);
 }

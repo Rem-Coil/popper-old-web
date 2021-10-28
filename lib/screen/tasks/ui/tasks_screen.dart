@@ -3,18 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
+import 'package:popper/screen/tasks/ui/task_information_screen.dart';
 import 'package:popper/widgets/new_task_form.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class TasksPage extends StatefulWidget {
+  static const route = '/tasks';
 
-  final String title;
+  TasksPage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TasksPageState createState() => _TasksPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TasksPageState extends State<TasksPage> {
   @override
   void initState() {
     super.initState();
@@ -25,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Title'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),
@@ -50,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: BlocBuilder<DataTableBloc, DataTableState>(
                       builder: (context, state) {
                         return DataTable(
+                          showCheckboxColumn: false,
                           columns: [
                             DataColumn(
                               label: Text('Name'),
@@ -81,32 +83,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             DataColumn(
                               label: Text('Testing'),
                             ),
-                            DataColumn(label: Text('')),
                           ],
-                          rows: state.listBobinas
-                              .map(
-                                (bobina) => DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(Text(bobina.taskName)),
-                                    DataCell(Text(bobina.taskNumber)),
-                                    DataCell(Text(bobina.quantity.toString())),
-                                    DataCell(Text(bobina.winding.toString())),
-                                    DataCell(Text(bobina.output.toString())),
-                                    DataCell(Text(bobina.isolation.toString())),
-                                    DataCell(Text(bobina.molding.toString())),
-                                    DataCell(Text(bobina.crimping.toString())),
-                                    DataCell(Text(bobina.quality.toString())),
-                                    DataCell(Text(bobina.testing.toString())),
-                                    DataCell(ElevatedButton(
-                                      child: Text('More information'),
-                                      onPressed: () {
-                                        print('button ${bobina.taskName}');
-                                      },
-                                    ))
-                                  ],
-                                ),
-                              )
-                              .toList(),
+                          rows: state.listBobinas.map((bobina) {
+                            return DataRow(
+                              onSelectChanged: (_) {
+                                Navigator.of(context).pushNamed(
+                                  InformationPage.route,
+                                  arguments: bobina.id,
+                                );
+                              },
+                              cells: <DataCell>[
+                                DataCell(Text(bobina.taskName)),
+                                DataCell(Text(bobina.taskNumber)),
+                                DataCell(Text(bobina.quantity.toString())),
+                                DataCell(Text(bobina.winding.toString())),
+                                DataCell(Text(bobina.output.toString())),
+                                DataCell(Text(bobina.isolation.toString())),
+                                DataCell(Text(bobina.molding.toString())),
+                                DataCell(Text(bobina.crimping.toString())),
+                                DataCell(Text(bobina.quality.toString())),
+                                DataCell(Text(bobina.testing.toString())),
+                              ],
+                            );
+                          }).toList(),
                         );
                       },
                     ),

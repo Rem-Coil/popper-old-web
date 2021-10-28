@@ -12,14 +12,21 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Popper',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: BlocProvider<TaskInformationBloc>(
-        create: (_) => TaskInformationBloc(),
-        child: InformationPage(title: 'Popper demo page'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => TaskInformationBloc()),
+        BlocProvider(create: (_) => DataTableBloc()),
+      ],
+      child: MaterialApp(
+        title: 'Popper',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routes: {
+          TasksPage.route: (_) => TasksPage(),
+          InformationPage.route: (_) => InformationPage(),
+        },
+        initialRoute: TasksPage.route,
       ),
     );
   }

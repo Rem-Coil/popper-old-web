@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class TaskInformationEvent {}
 
 class ShowTaskInformation extends TaskInformationEvent {
-  final String id;
+  final int id;
 
   ShowTaskInformation(this.id);
 }
