@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:popper/models/action.dart';
-import 'package:popper/models/bobin_information.dart';
+import 'package:popper/models/bobbin_information.dart';
 import 'package:popper/models/model.dart';
 import 'package:popper/models/added_task.dart';
 import 'package:retrofit/retrofit.dart';

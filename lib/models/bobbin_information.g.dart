@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bobin_information.dart';
+part of 'bobbin_information.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

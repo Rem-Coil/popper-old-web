@@ -22,4 +22,8 @@ class DataTableState {
 
   DataTableState addTask(TaskBobina task) =>
       DataTableState._(false, null, List.from(listBobinas)..add(task));
+
+  bool get hasError => errorMessage != null;
+
+  String? get err => errorMessage;
 }

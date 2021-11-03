@@ -18,5 +18,9 @@ class TaskInformationState {
       TaskInformationState._(false, errorMessage, infoList);
 
   TaskInformationState showInfo(List<FinalInfo> list) =>
-      TaskInformationState._(false, errorMessage, list);
+      TaskInformationState._(false, null, list);
+
+  bool get hasError => errorMessage != null;
+
+  String? get err => errorMessage;
 }

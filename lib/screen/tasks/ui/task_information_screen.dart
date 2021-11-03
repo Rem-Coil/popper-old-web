@@ -58,49 +58,70 @@ class _InformationPageState extends State<InformationPage> {
                     child:
                         BlocBuilder<TaskInformationBloc, TaskInformationState>(
                       builder: (context, state) {
-                        return DataTable(
-                          columns: [
-                            DataColumn(
-                              label: Text('Name'),
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 16,
+                              child: _StatusText(
+                                hasError:
+                                    state.infoList.isEmpty && state.hasError,
+                                hasBobbins: state.infoList.isEmpty,
+                                error: state.err,
+                              ),
                             ),
-                            DataColumn(
-                              label: Text('Winding'),
+                            SizedBox(
+                              height: 4,
+                              child: state.infoList.isEmpty || state.isLoad
+                                  ? LinearProgressIndicator(
+                                      backgroundColor: Colors.white)
+                                  : null,
                             ),
-                            DataColumn(
-                              label: Text('Output'),
-                            ),
-                            DataColumn(
-                              label: Text('Isolation'),
-                            ),
-                            DataColumn(
-                              label: Text('Molding'),
-                            ),
-                            DataColumn(
-                              label: Text('Crimping'),
-                            ),
-                            DataColumn(
-                              label: Text('Quality'),
-                            ),
-                            DataColumn(
-                              label: Text('Testing'),
+                            DataTable(
+                              columns: [
+                                DataColumn(
+                                  label: Text('Name'),
+                                ),
+                                DataColumn(
+                                  label: Text('Winding'),
+                                ),
+                                DataColumn(
+                                  label: Text('Output'),
+                                ),
+                                DataColumn(
+                                  label: Text('Isolation'),
+                                ),
+                                DataColumn(
+                                  label: Text('Molding'),
+                                ),
+                                DataColumn(
+                                  label: Text('Crimping'),
+                                ),
+                                DataColumn(
+                                  label: Text('Quality'),
+                                ),
+                                DataColumn(
+                                  label: Text('Testing'),
+                                ),
+                              ],
+                              rows: state.infoList
+                                  .map(
+                                    (information) => DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text(information.taskName)),
+                                        DataCell(Text(information.winding)),
+                                        DataCell(Text(information.output)),
+                                        DataCell(Text(information.isolation)),
+                                        DataCell(Text(information.molding)),
+                                        DataCell(Text(information.crimping)),
+                                        DataCell(Text(information.quality)),
+                                        DataCell(Text(information.testing)),
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
                             ),
                           ],
-                          rows: state.infoList
-                              .map(
-                                (information) => DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(Text(information.taskName)),
-                                    DataCell(Text(information.winding)),
-                                    DataCell(Text(information.output)),
-                                    DataCell(Text(information.isolation)),
-                                    DataCell(Text(information.molding)),
-                                    DataCell(Text(information.crimping)),
-                                    DataCell(Text(information.quality)),
-                                    DataCell(Text(information.testing)),
-                                  ],
-                                ),
-                              )
-                              .toList(),
                         );
                       },
                     ),
@@ -112,5 +133,28 @@ class _InformationPageState extends State<InformationPage> {
         ),
       ),
     );
+  }
+}
+
+class _StatusText extends StatelessWidget {
+  final onEmptyBobbinsText =
+      'Список катушек пуст или произошла ошибка загрузки данных, попробуйте позже';
+  final bool hasError;
+  final String? error;
+  final bool hasBobbins;
+
+  const _StatusText({
+    Key? key,
+    required this.error,
+    required this.hasBobbins,
+    required this.hasError,
+  })  : assert(!hasError || error != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (hasError) return Text(error!);
+    if (hasBobbins) return Text(onEmptyBobbinsText);
+    return Container();
   }
 }

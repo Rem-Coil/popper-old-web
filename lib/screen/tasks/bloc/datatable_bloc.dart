@@ -15,8 +15,10 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
 
   Future<void> onGetTasks(
       ShowDataTable event, Emitter<DataTableState> emit) async {
+    emit(state.load());
     final tasks = await tasksRepository.getTasks();
-    final newState = state.create(tasks);
+    final newState = tasks.fold((failure) => state.error(failure.message),
+        (tasks) => state.create(tasks));
     emit(newState);
   }
 

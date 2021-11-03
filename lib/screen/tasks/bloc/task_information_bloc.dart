@@ -15,18 +15,25 @@ class TaskInformationBloc
 
   Future<void> onShowTaskInformationEvent(
       ShowTaskInformation event, Emitter<TaskInformationState> emit) async {
+    emit(state.load());
     final bobbinInformation =
         await taskInformationRepository.getBobbinInformation(event.id);
-    List<FinalInfo> finalList =
-        bobbinInformation.map((e) => FinalInfo.empty(e.bobbinNumber)).toList();
-    emit(state.showInfo(finalList));
-
-    final actions = await taskInformationRepository.getActions(event.id);
-    actions.forEach((action) {
-      final index = finalList
-          .indexWhere((element) => element.taskName == action.bobbinNumber);
-      finalList[index] = finalList[index].update(action);
+    final firstState = bobbinInformation.fold<Future<TaskInformationState>>(
+        (failure) async => state.error(failure.message), (bobbins) async {
+      List<FinalInfo> finalList =
+          bobbins.map((e) => FinalInfo.empty(e.bobbinNumber)).toList();
+      //emit(state.showInfo(finalList));
+      final actions = await taskInformationRepository.getActions(event.id);
+      return actions.fold<TaskInformationState>(
+          (failure) => state.error(failure.message), (actions) {
+        actions.forEach((action) {
+          final index = finalList
+              .indexWhere((element) => element.taskName == action.bobbinNumber);
+          finalList[index] = finalList[index].update(action);
+        });
+        return state.showInfo(finalList);
+      });
     });
-    emit(state.showInfo(finalList));
+    emit(await firstState);
   }
 }

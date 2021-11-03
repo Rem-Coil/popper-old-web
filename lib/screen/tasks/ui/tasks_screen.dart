@@ -50,62 +50,82 @@ class _TasksPageState extends State<TasksPage> {
                     width: double.infinity,
                     child: BlocBuilder<DataTableBloc, DataTableState>(
                       builder: (context, state) {
-                        return DataTable(
-                          showCheckboxColumn: false,
-                          columns: [
-                            DataColumn(
-                              label: Text('Name'),
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 16,
+                              child: _StatusText(
+                                hasError:
+                                    state.listBobinas.isEmpty && state.hasError,
+                                hasBobbins: state.listBobinas.isEmpty,
+                                error: state.err,
+                              ),
                             ),
-                            DataColumn(
-                              label: Text('Number'),
+                            SizedBox(
+                              height: 4,
+                              child: state.listBobinas.isEmpty || state.isLoad
+                                  ? LinearProgressIndicator(
+                                      backgroundColor: Colors.white)
+                                  : null,
                             ),
-                            DataColumn(
-                              label: Text('Count'),
-                            ),
-                            DataColumn(
-                              label: Text('Winding'),
-                            ),
-                            DataColumn(
-                              label: Text('Output'),
-                            ),
-                            DataColumn(
-                              label: Text('Isolation'),
-                            ),
-                            DataColumn(
-                              label: Text('Molding'),
-                            ),
-                            DataColumn(
-                              label: Text('Crimping'),
-                            ),
-                            DataColumn(
-                              label: Text('Quality'),
-                            ),
-                            DataColumn(
-                              label: Text('Testing'),
+                            DataTable(
+                              showCheckboxColumn: false,
+                              columns: [
+                                DataColumn(
+                                  label: Text('Name'),
+                                ),
+                                DataColumn(
+                                  label: Text('Number'),
+                                ),
+                                DataColumn(
+                                  label: Text('Count'),
+                                ),
+                                DataColumn(
+                                  label: Text('Winding'),
+                                ),
+                                DataColumn(
+                                  label: Text('Output'),
+                                ),
+                                DataColumn(
+                                  label: Text('Isolation'),
+                                ),
+                                DataColumn(
+                                  label: Text('Molding'),
+                                ),
+                                DataColumn(
+                                  label: Text('Crimping'),
+                                ),
+                                DataColumn(
+                                  label: Text('Quality'),
+                                ),
+                                DataColumn(
+                                  label: Text('Testing'),
+                                ),
+                              ],
+                              rows: state.listBobinas.map((bobina) {
+                                return DataRow(
+                                  onSelectChanged: (_) {
+                                    Navigator.of(context).pushNamed(
+                                      InformationPage.route,
+                                      arguments: bobina.id,
+                                    );
+                                  },
+                                  cells: <DataCell>[
+                                    DataCell(Text(bobina.taskName)),
+                                    DataCell(Text(bobina.taskNumber)),
+                                    DataCell(Text(bobina.quantity.toString())),
+                                    DataCell(Text(bobina.winding.toString())),
+                                    DataCell(Text(bobina.output.toString())),
+                                    DataCell(Text(bobina.isolation.toString())),
+                                    DataCell(Text(bobina.molding.toString())),
+                                    DataCell(Text(bobina.crimping.toString())),
+                                    DataCell(Text(bobina.quality.toString())),
+                                    DataCell(Text(bobina.testing.toString())),
+                                  ],
+                                );
+                              }).toList(),
                             ),
                           ],
-                          rows: state.listBobinas.map((bobina) {
-                            return DataRow(
-                              onSelectChanged: (_) {
-                                Navigator.of(context).pushNamed(
-                                  InformationPage.route,
-                                  arguments: bobina.id,
-                                );
-                              },
-                              cells: <DataCell>[
-                                DataCell(Text(bobina.taskName)),
-                                DataCell(Text(bobina.taskNumber)),
-                                DataCell(Text(bobina.quantity.toString())),
-                                DataCell(Text(bobina.winding.toString())),
-                                DataCell(Text(bobina.output.toString())),
-                                DataCell(Text(bobina.isolation.toString())),
-                                DataCell(Text(bobina.molding.toString())),
-                                DataCell(Text(bobina.crimping.toString())),
-                                DataCell(Text(bobina.quality.toString())),
-                                DataCell(Text(bobina.testing.toString())),
-                              ],
-                            );
-                          }).toList(),
                         );
                       },
                     ),
@@ -117,5 +137,28 @@ class _TasksPageState extends State<TasksPage> {
         ),
       ),
     );
+  }
+}
+
+class _StatusText extends StatelessWidget {
+  final onEmptyBobbinsText =
+      'Список катушек пуст или произошла ошибка загрузки данных, попробуйте позже';
+  final bool hasError;
+  final String? error;
+  final bool hasBobbins;
+
+  const _StatusText({
+    Key? key,
+    required this.error,
+    required this.hasBobbins,
+    required this.hasError,
+  })  : assert(!hasError || error != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (hasError) return Text(error!);
+    if (hasBobbins) return Text(onEmptyBobbinsText);
+    return Container();
   }
 }
