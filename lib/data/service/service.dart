@@ -20,6 +20,6 @@ abstract class Service {
   @GET('/action/{id}')
   Future<List<Action>> getActions(@Path("id") int id);
 
-  @GET('/bobbin/{id}')
+  @GET('/bobbin/task/{id}')
   Future<List<BobbinInformation>> getBobbinInformation(@Path("id") int id);
 }

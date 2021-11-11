@@ -71,7 +71,7 @@ class _Service implements Service {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<BobbinInformation>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/bobbin/$id',
+                .compose(_dio.options, '/bobbin/task/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!

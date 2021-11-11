@@ -6,17 +6,17 @@ part of 'bobbin_information.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BobbinInformation _$BobinInformationFromJson(Map<String, dynamic> json) {
+BobbinInformation _$BobbinInformationFromJson(Map<String, dynamic> json) {
   return BobbinInformation(
     id: json['id'] as int,
-    taskId: json['taskId'] as int,
-    bobbinNumber: json['bobbinNumber'] as String,
+    taskId: json['task_id'] as int,
+    bobbinNumber: json['bobbin_number'] as String,
   );
 }
 
-Map<String, dynamic> _$BobinInformationToJson(BobbinInformation instance) =>
+Map<String, dynamic> _$BobbinInformationToJson(BobbinInformation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'taskId': instance.taskId,
-      'bobbinNumber': instance.bobbinNumber,
+      'task_id': instance.taskId,
+      'bobbin_number': instance.bobbinNumber,
     };

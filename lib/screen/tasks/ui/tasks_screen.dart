@@ -5,6 +5,7 @@ import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/screen/tasks/ui/task_information_screen.dart';
 import 'package:popper/widgets/new_task_form.dart';
+import 'package:popper/widgets/status_bar.dart';
 
 class TasksPage extends StatefulWidget {
   static const route = '/tasks';
@@ -18,8 +19,9 @@ class TasksPage extends StatefulWidget {
 class _TasksPageState extends State<TasksPage> {
   @override
   void initState() {
+    context.read<DataTableBloc>().add(ShowDataTable());
+    // BlocProvider.of<DataTableBloc>(context)
     super.initState();
-    BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
   }
 
   @override
@@ -52,21 +54,11 @@ class _TasksPageState extends State<TasksPage> {
                       builder: (context, state) {
                         return Column(
                           children: [
-                            SizedBox(
-                              height: 16,
-                              child: _StatusText(
-                                hasError:
-                                    state.listBobinas.isEmpty && state.hasError,
-                                hasBobbins: state.listBobinas.isEmpty,
-                                error: state.err,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                              child: state.listBobinas.isEmpty || state.isLoad
-                                  ? LinearProgressIndicator(
-                                      backgroundColor: Colors.white)
-                                  : null,
+                            StatusBar(
+                              error: state.errorMessage,
+                              hasElements: state.listBobinas.isNotEmpty,
+                              hasError: state.hasError,
+                              isLoad: state.isLoad,
                             ),
                             DataTable(
                               showCheckboxColumn: false,
@@ -137,28 +129,5 @@ class _TasksPageState extends State<TasksPage> {
         ),
       ),
     );
-  }
-}
-
-class _StatusText extends StatelessWidget {
-  final onEmptyBobbinsText =
-      'Список катушек пуст или произошла ошибка загрузки данных, попробуйте позже';
-  final bool hasError;
-  final String? error;
-  final bool hasBobbins;
-
-  const _StatusText({
-    Key? key,
-    required this.error,
-    required this.hasBobbins,
-    required this.hasError,
-  })  : assert(!hasError || error != null),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (hasError) return Text(error!);
-    if (hasBobbins) return Text(onEmptyBobbinsText);
-    return Container();
   }
 }

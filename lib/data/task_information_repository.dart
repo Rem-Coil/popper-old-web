@@ -16,15 +16,14 @@ class TaskInformationRepository {
       switch (e.response?.statusCode) {
         case HttpStatus.internalServerError:
           return Left(ServerFailure());
-        case HttpStatus.unauthorized:
-          return Left(WrongCredentials());
       }
       return Left(UnknownFailure());
     }
   }
 
   Future<Either<Failure, List<BobbinInformation>>> getBobbinInformation(
-      int id) async {
+    int id,
+  ) async {
     try {
       final service = ApiProvider().getApiService();
       final list = await service.getBobbinInformation(id);
@@ -33,8 +32,6 @@ class TaskInformationRepository {
       switch (e.response?.statusCode) {
         case HttpStatus.internalServerError:
           return Left(ServerFailure());
-        case HttpStatus.unauthorized:
-          return Left(WrongCredentials());
       }
       return Left(UnknownFailure());
     }

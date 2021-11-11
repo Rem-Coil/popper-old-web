@@ -5,7 +5,9 @@ part 'bobbin_information.g.dart';
 @JsonSerializable()
 class BobbinInformation {
   final int id;
+  @JsonKey(name: 'task_id')
   final int taskId;
+  @JsonKey(name: 'bobbin_number')
   final String bobbinNumber;
 
   BobbinInformation({
@@ -15,7 +17,7 @@ class BobbinInformation {
   });
 
   factory BobbinInformation.fromJson(Map<String, dynamic> json) =>
-      _$BobinInformationFromJson(json);
+      _$BobbinInformationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BobinInformationToJson(this);
+  Map<String, dynamic> toJson() => _$BobbinInformationToJson(this);
 }

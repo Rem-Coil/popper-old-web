@@ -16,8 +16,6 @@ class TaskRepository {
       switch (e.response?.statusCode) {
         case HttpStatus.internalServerError:
           return Left(ServerFailure());
-        case HttpStatus.unauthorized:
-          return Left(WrongCredentials());
       }
       return Left(UnknownFailure());
     }

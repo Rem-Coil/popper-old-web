@@ -21,6 +21,4 @@ class TaskInformationState {
       TaskInformationState._(false, null, list);
 
   bool get hasError => errorMessage != null;
-
-  String? get err => errorMessage;
 }

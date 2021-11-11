@@ -7,9 +7,11 @@ import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_event.dart';
 import 'package:popper/screen/tasks/bloc/task_information_state.dart';
 import 'package:popper/widgets/new_task_form.dart';
+import 'package:popper/widgets/status_bar.dart';
 
 class InformationPage extends StatefulWidget {
   static const route = '/taskInfo';
+
   InformationPage({Key? key}) : super(key: key);
 
   @override
@@ -61,21 +63,11 @@ class _InformationPageState extends State<InformationPage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 16,
-                              child: _StatusText(
-                                hasError:
-                                    state.infoList.isEmpty && state.hasError,
-                                hasBobbins: state.infoList.isEmpty,
-                                error: state.err,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                              child: state.infoList.isEmpty || state.isLoad
-                                  ? LinearProgressIndicator(
-                                      backgroundColor: Colors.white)
-                                  : null,
+                            StatusBar(
+                              error: state.errorMessage,
+                              hasElements: state.infoList.isNotEmpty,
+                              hasError: state.hasError,
+                              isLoad: state.isLoad,
                             ),
                             DataTable(
                               columns: [
@@ -133,28 +125,5 @@ class _InformationPageState extends State<InformationPage> {
         ),
       ),
     );
-  }
-}
-
-class _StatusText extends StatelessWidget {
-  final onEmptyBobbinsText =
-      'Список катушек пуст или произошла ошибка загрузки данных, попробуйте позже';
-  final bool hasError;
-  final String? error;
-  final bool hasBobbins;
-
-  const _StatusText({
-    Key? key,
-    required this.error,
-    required this.hasBobbins,
-    required this.hasError,
-  })  : assert(!hasError || error != null),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (hasError) return Text(error!);
-    if (hasBobbins) return Text(onEmptyBobbinsText);
-    return Container();
   }
 }
