@@ -16,7 +16,7 @@ abstract class Service {
   @POST('/task')
   Future<TaskBobina> postTask(@Body() Map<String, dynamic> map);
 
-  @GET('/action/{id}')
+  @GET('/action/task/{id}')
   Future<List<Action>> getActions(@Path("id") int id);
 
   @GET('/bobbin/task/{id}')

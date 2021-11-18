@@ -54,7 +54,7 @@ class _Service implements Service {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<Action>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/action/$id',
+                .compose(_dio.options, '/action/task/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
