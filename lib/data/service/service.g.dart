@@ -31,18 +31,18 @@ class _Service implements Service {
   }
 
   @override
-  Future<AddedTask> postTask(map) async {
+  Future<TaskBobina> postTask(map) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(map);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AddedTask>(
+        _setStreamType<TaskBobina>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/task',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AddedTask.fromJson(_result.data!);
+    final value = TaskBobina.fromJson(_result.data!);
     return value;
   }
 

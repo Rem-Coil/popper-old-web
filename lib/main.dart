@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => TaskInformationBloc()),
         BlocProvider(create: (_) => DataTableBloc()),
       ],
       child: MaterialApp(
@@ -22,10 +21,26 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        routes: {
-          TasksPage.route: (_) => TasksPage(),
-          InformationPage.route: (_) => InformationPage(),
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case TasksPage.route:
+              return MaterialPageRoute(builder: (context) => TasksPage());
+            case InformationPage.route:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  child: InformationPage(id: id),
+                  create: (context) {
+                    return TaskInformationBloc();
+                  },
+                ),
+              );
+          }
         },
+        // routes: {
+        //   TasksPage.route: (_) => TasksPage(),
+        //   InformationPage.route: (_) => InformationPage(),
+        // },
         initialRoute: TasksPage.route,
       ),
     );

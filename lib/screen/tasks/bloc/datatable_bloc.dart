@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/models/added_task.dart';
-import 'package:popper/models/model.dart';
 import 'package:popper/data/task_repository.dart';
 
 class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {

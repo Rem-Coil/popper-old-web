@@ -11,24 +11,23 @@ import 'package:popper/widgets/status_bar.dart';
 
 class InformationPage extends StatefulWidget {
   static const route = '/taskInfo';
+  final int id;
 
-  InformationPage({Key? key}) : super(key: key);
+  InformationPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   _InformationPageState createState() => _InformationPageState();
 }
 
 class _InformationPageState extends State<InformationPage> {
-  late int id;
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      id = ModalRoute.of(context)!.settings.arguments as int;
-      BlocProvider.of<TaskInformationBloc>(context)
-          .add(ShowTaskInformation(id));
-    });
+    BlocProvider.of<TaskInformationBloc>(context)
+        .add(ShowTaskInformation(widget.id));
   }
 
   @override
@@ -43,85 +42,82 @@ class _InformationPageState extends State<InformationPage> {
               icon: Icon(Icons.replay),
               onPressed: () {
                 BlocProvider.of<TaskInformationBloc>(context)
-                    .add(ShowTaskInformation(id));
+                    .add(ShowTaskInformation(widget.id));
               },
             ),
           ),
         ],
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    width: double.infinity,
-                    child:
-                        BlocBuilder<TaskInformationBloc, TaskInformationState>(
-                      builder: (context, state) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            StatusBar(
-                              error: state.errorMessage,
-                              hasElements: state.infoList.isNotEmpty,
-                              hasError: state.hasError,
-                              isLoad: state.isLoad,
-                            ),
-                            DataTable(
-                              columns: [
-                                DataColumn(
-                                  label: Text('Name'),
-                                ),
-                                DataColumn(
-                                  label: Text('Winding'),
-                                ),
-                                DataColumn(
-                                  label: Text('Output'),
-                                ),
-                                DataColumn(
-                                  label: Text('Isolation'),
-                                ),
-                                DataColumn(
-                                  label: Text('Molding'),
-                                ),
-                                DataColumn(
-                                  label: Text('Crimping'),
-                                ),
-                                DataColumn(
-                                  label: Text('Quality'),
-                                ),
-                                DataColumn(
-                                  label: Text('Testing'),
-                                ),
-                              ],
-                              rows: state.infoList
-                                  .map(
-                                    (information) => DataRow(
-                                      cells: <DataCell>[
-                                        DataCell(Text(information.taskName)),
-                                        DataCell(Text(information.winding)),
-                                        DataCell(Text(information.output)),
-                                        DataCell(Text(information.isolation)),
-                                        DataCell(Text(information.molding)),
-                                        DataCell(Text(information.crimping)),
-                                        DataCell(Text(information.quality)),
-                                        DataCell(Text(information.testing)),
-                                      ],
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  child: BlocBuilder<TaskInformationBloc, TaskInformationState>(
+                    builder: (context, state) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          StatusBar(
+                            error: state.errorMessage,
+                            hasElements: state.infoList.isNotEmpty,
+                            hasError: state.hasError,
+                            isLoad: state.isLoad,
+                          ),
+                          DataTable(
+                            columns: [
+                              DataColumn(
+                                label: Text('Name'),
+                              ),
+                              DataColumn(
+                                label: Text('Winding'),
+                              ),
+                              DataColumn(
+                                label: Text('Output'),
+                              ),
+                              DataColumn(
+                                label: Text('Isolation'),
+                              ),
+                              DataColumn(
+                                label: Text('Molding'),
+                              ),
+                              DataColumn(
+                                label: Text('Crimping'),
+                              ),
+                              DataColumn(
+                                label: Text('Quality'),
+                              ),
+                              DataColumn(
+                                label: Text('Testing'),
+                              ),
+                            ],
+                            rows: state.infoList
+                                .map(
+                                  (information) => DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text(information.taskName)),
+                                      DataCell(Text(information.winding)),
+                                      DataCell(Text(information.output)),
+                                      DataCell(Text(information.isolation)),
+                                      DataCell(Text(information.molding)),
+                                      DataCell(Text(information.crimping)),
+                                      DataCell(Text(information.quality)),
+                                      DataCell(Text(information.testing)),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
