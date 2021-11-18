@@ -3,25 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'package:popper/screen/tasks/ui/task_information_screen.dart';
+import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
+import 'package:popper/screen/tasks/bloc/task_information_event.dart';
+import 'package:popper/screen/tasks/bloc/task_information_state.dart';
 import 'package:popper/widgets/new_task_form.dart';
 import 'package:popper/widgets/status_bar.dart';
 
-class TasksPage extends StatefulWidget {
-  static const route = '/tasks';
+class InformationPage extends StatefulWidget {
+  static const route = '/taskInfo';
 
-  TasksPage({Key? key}) : super(key: key);
+  InformationPage({Key? key}) : super(key: key);
 
   @override
-  _TasksPageState createState() => _TasksPageState();
+  _InformationPageState createState() => _InformationPageState();
 }
 
-class _TasksPageState extends State<TasksPage> {
+class _InformationPageState extends State<InformationPage> {
+  late int id;
+
   @override
   void initState() {
-    context.read<DataTableBloc>().add(ShowDataTable());
-    // BlocProvider.of<DataTableBloc>(context)
     super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      id = ModalRoute.of(context)!.settings.arguments as int;
+      BlocProvider.of<TaskInformationBloc>(context)
+          .add(ShowTaskInformation(id));
+    });
   }
 
   @override
@@ -35,7 +42,8 @@ class _TasksPageState extends State<TasksPage> {
             child: IconButton(
               icon: Icon(Icons.replay),
               onPressed: () {
-                BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
+                BlocProvider.of<TaskInformationBloc>(context)
+                    .add(ShowTaskInformation(id));
               },
             ),
           ),
@@ -45,32 +53,26 @@ class _TasksPageState extends State<TasksPage> {
         child: Center(
           child: Column(
             children: [
-              NewTaskForm(),
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
                     width: double.infinity,
-                    child: BlocBuilder<DataTableBloc, DataTableState>(
+                    child:
+                        BlocBuilder<TaskInformationBloc, TaskInformationState>(
                       builder: (context, state) {
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             StatusBar(
                               error: state.errorMessage,
-                              hasElements: state.listBobinas.isNotEmpty,
+                              hasElements: state.infoList.isNotEmpty,
                               hasError: state.hasError,
                               isLoad: state.isLoad,
                             ),
                             DataTable(
-                              showCheckboxColumn: false,
                               columns: [
                                 DataColumn(
                                   label: Text('Name'),
-                                ),
-                                DataColumn(
-                                  label: Text('Number'),
-                                ),
-                                DataColumn(
-                                  label: Text('Count'),
                                 ),
                                 DataColumn(
                                   label: Text('Winding'),
@@ -94,28 +96,22 @@ class _TasksPageState extends State<TasksPage> {
                                   label: Text('Testing'),
                                 ),
                               ],
-                              rows: state.listBobinas.map((bobina) {
-                                return DataRow(
-                                  onSelectChanged: (_) {
-                                    Navigator.of(context).pushNamed(
-                                      InformationPage.route,
-                                      arguments: bobina.id,
-                                    );
-                                  },
-                                  cells: <DataCell>[
-                                    DataCell(Text(bobina.taskName)),
-                                    DataCell(Text(bobina.taskNumber)),
-                                    DataCell(Text(bobina.quantity.toString())),
-                                    DataCell(Text(bobina.winding.toString())),
-                                    DataCell(Text(bobina.output.toString())),
-                                    DataCell(Text(bobina.isolation.toString())),
-                                    DataCell(Text(bobina.molding.toString())),
-                                    DataCell(Text(bobina.crimping.toString())),
-                                    DataCell(Text(bobina.quality.toString())),
-                                    DataCell(Text(bobina.testing.toString())),
-                                  ],
-                                );
-                              }).toList(),
+                              rows: state.infoList
+                                  .map(
+                                    (information) => DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text(information.taskName)),
+                                        DataCell(Text(information.winding)),
+                                        DataCell(Text(information.output)),
+                                        DataCell(Text(information.isolation)),
+                                        DataCell(Text(information.molding)),
+                                        DataCell(Text(information.crimping)),
+                                        DataCell(Text(information.quality)),
+                                        DataCell(Text(information.testing)),
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
                             ),
                           ],
                         );
