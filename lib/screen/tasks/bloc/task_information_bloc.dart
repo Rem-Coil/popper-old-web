@@ -23,7 +23,7 @@ class TaskInformationBloc
     final actions = await taskInformationRepository.getActions(event.id);
 
     final firstState = bobbins
-        .map((b) => b.map((e) => FinalInfo.empty(e.bobbinNumber)).toList())
+        .map((b) => b.map((e) => FinalInfo.empty(e)).toList())
         .fold<Future<TaskInformationState>>(
       (failure) async => state.error(failure.message),
       (bobbins) async {

@@ -8,9 +8,9 @@ part of 'action.dart';
 
 Action _$ActionFromJson(Map<String, dynamic> json) {
   return Action(
-    bobbinId: json['bobbin_id'] as int,
+    bobbinId: json['bobbinId'] as int,
     bobbinNumber: json['bobbin_number'] as String,
-    firstname: json['first_name'] as String,
+    firstname: json['firstname'] as String,
     secondName: json['second_name'] as String,
     surname: json['surname'] as String,
     actionType: json['action_type'] as String,
@@ -19,9 +19,9 @@ Action _$ActionFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ActionToJson(Action instance) => <String, dynamic>{
-      'bobbin_id': instance.bobbinId,
+      'bobbinId': instance.bobbinId,
       'bobbin_number': instance.bobbinNumber,
-      'first_name': instance.firstname,
+      'firstname': instance.firstname,
       'second_name': instance.secondName,
       'surname': instance.surname,
       'action_type': instance.actionType,
