@@ -5,6 +5,7 @@ import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/screen/tasks/ui/task_information_screen.dart';
 import 'package:popper/widgets/new_task_form.dart';
+import 'package:popper/widgets/search_form.dart';
 import 'package:popper/widgets/status_bar.dart';
 
 class TasksPage extends StatefulWidget {
@@ -46,6 +47,7 @@ class _TasksPageState extends State<TasksPage> {
           child: Column(
             children: [
               NewTaskForm(),
+              SearchForm(),
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(

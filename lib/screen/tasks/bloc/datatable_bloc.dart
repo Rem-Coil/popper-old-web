@@ -11,6 +11,7 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
   DataTableBloc() : super(DataTableState.initial()) {
     on<ShowDataTable>(onGetTasks);
     on<CreateNewTask>(onCreateNewTask);
+    on<UseFilter>(onUseFilter);
   }
 
   Future<void> onGetTasks(
@@ -33,6 +34,21 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
     );
     final addedBobina = await tasksRepository.addTask(addedTask);
     final newState = state.addTask(addedBobina);
+    emit(newState);
+  }
+
+  Future<void> onUseFilter(
+      UseFilter event, Emitter<DataTableState> emit) async {
+    emit(state.load());
+    final tasks = await tasksRepository.getTasks();
+    final newState = tasks.fold(
+        (failure) => state.error(failure.message),
+        (tasks) => state.create((tasks
+              ..sort((TaskBobina a, TaskBobina b) => a.id - b.id))
+            .where((element) => element.taskName
+                .toLowerCase()
+                .contains(event.filterWord.toLowerCase()))
+            .toList()));
     emit(newState);
   }
 }
