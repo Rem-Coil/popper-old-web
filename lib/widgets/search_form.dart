@@ -18,13 +18,9 @@ class _SearchFormState extends State<SearchForm> {
   @override
   void initState() {
     searchingController.addListener(() {
-      BlocProvider.of<DataTableBloc>(context)
-        ..add(
-          UseFilter(
-            filterWord: searchingController.text,
-          ),
-        );
-      // countController.clear();
+      BlocProvider.of<DataTableBloc>(context).add(
+        UseFilter(filterWord: searchingController.text),
+      );
     });
   }
 
@@ -48,47 +44,11 @@ class _SearchFormState extends State<SearchForm> {
                 padding: const EdgeInsets.all(8.0),
                 child: Field(
                   controller: searchingController,
-                  validator: (value) =>
-                      /*value == null || value.isEmpty
-                      ? 'Поле не было заполнено'
-                      : null*/
-                      null,
+                  validator: (value) => null,
                   hintText: 'Введите имя для поиска',
                 ),
               ),
             ),
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: ElevatedButton(
-            //         child: Padding(
-            //           padding: const EdgeInsets.symmetric(vertical: 15),
-            //           child: Text(
-            //             'Применить',
-            //             style: TextStyle(fontSize: 20),
-            //           ),
-            //         ),
-            //         style: ButtonStyle(
-            //           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            //             RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(12.0),
-            //             ),
-            //           ),
-            //         ),
-            //         onPressed: () {
-            //           if (_formKey.currentState!.validate()) {
-            //             print('button pressed');
-            //             BlocProvider.of<DataTableBloc>(context)
-            //               ..add(
-            //                 UseFilter(
-            //                   filterWord: searchingController.text,
-            //                 ),
-            //               );
-            //             // countController.clear();
-            //           }
-            //         }),
-            //   ),
-            // ),
           ],
         ),
       ),
