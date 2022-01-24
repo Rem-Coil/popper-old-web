@@ -28,6 +28,10 @@ dependencies:
   dio: ^4.0.0
   retrofit: ^2.0.1
   dartz: ^0.10.0
+  flutter_redux: ^0.8.0
+  flutter_redux_dev_tools: ^0.5.0
+  flutter_redux_navigation: ^0.7.0
+  redux_thunk: ^0.4.0
 
   cupertino_icons: ^1.0.2
 
@@ -43,3 +47,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/

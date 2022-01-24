@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popper/constants.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/ui/task_information_screen.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Popper',
         theme: ThemeData(
+          canvasColor: bgColor,
+          scaffoldBackgroundColor: bgColor,
+          primaryColor: primaryColor,
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: (settings) {

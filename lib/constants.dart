@@ -18,3 +18,8 @@ const kTextFieldInputDecoration = InputDecoration(
 final kAddButtonStyle = ElevatedButton.styleFrom(
   textStyle: TextStyle(fontSize: 12.0), /*fixedSize: Size()*/
 );
+
+const secondaryColor = Color(0xFF42A5F5);
+const primaryColor = Color(0xFF2196F3);
+const bgColor = Color(0xFFFFFFFF);
+const defaultPadding = 16.0;

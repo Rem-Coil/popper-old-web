@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
-import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
+import 'package:popper/screen/base_mian%20screen.dart';
 import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_event.dart';
 import 'package:popper/screen/tasks/bloc/task_information_state.dart';
-import 'package:popper/widgets/new_task_form.dart';
 import 'package:popper/widgets/status_bar.dart';
 
 class InformationPage extends StatefulWidget {
   static const route = '/taskInfo';
+  static const screenNumber = 2;
   final int id;
 
   InformationPage({
@@ -23,6 +21,9 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
+  static const screenNumber = 2;
+  static const route = '/taskInfo';
+
   @override
   void initState() {
     super.initState();
@@ -32,93 +33,79 @@ class _InformationPageState extends State<InformationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Title'),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: IconButton(
-              icon: Icon(Icons.replay),
-              onPressed: () {
-                BlocProvider.of<TaskInformationBloc>(context)
-                    .add(ShowTaskInformation(widget.id));
-              },
-            ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  width: double.infinity,
-                  child: BlocBuilder<TaskInformationBloc, TaskInformationState>(
-                    builder: (context, state) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          StatusBar(
-                            error: state.errorMessage,
-                            hasElements: state.infoList.isNotEmpty,
-                            hasError: state.hasError,
-                            isLoad: state.isLoad,
-                          ),
-                          DataTable(
-                            columns: [
-                              DataColumn(
-                                label: Text('Name'),
-                              ),
-                              DataColumn(
-                                label: Text('Winding'),
-                              ),
-                              DataColumn(
-                                label: Text('Output'),
-                              ),
-                              DataColumn(
-                                label: Text('Isolation'),
-                              ),
-                              DataColumn(
-                                label: Text('Molding'),
-                              ),
-                              DataColumn(
-                                label: Text('Crimping'),
-                              ),
-                              DataColumn(
-                                label: Text('Quality'),
-                              ),
-                              DataColumn(
-                                label: Text('Testing'),
-                              ),
-                            ],
-                            rows: state.infoList
-                                .map(
-                                  (information) => DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(Text(information.taskName)),
-                                      DataCell(Text(information.winding)),
-                                      DataCell(Text(information.output)),
-                                      DataCell(Text(information.isolation)),
-                                      DataCell(Text(information.molding)),
-                                      DataCell(Text(information.crimping)),
-                                      DataCell(Text(information.quality)),
-                                      DataCell(Text(information.testing)),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+    return MainScreen(
+      screenIndex: screenNumber,
+      title: 'Катушки',
+      currentRoute: route,
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                child: BlocBuilder<TaskInformationBloc, TaskInformationState>(
+                  builder: (context, state) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        StatusBar(
+                          error: state.errorMessage,
+                          hasElements: state.infoList.isNotEmpty,
+                          hasError: state.hasError,
+                          isLoad: state.isLoad,
+                        ),
+                        DataTable(
+                          columns: [
+                            DataColumn(
+                              label: Text('Name'),
+                            ),
+                            DataColumn(
+                              label: Text('Winding'),
+                            ),
+                            DataColumn(
+                              label: Text('Output'),
+                            ),
+                            DataColumn(
+                              label: Text('Isolation'),
+                            ),
+                            DataColumn(
+                              label: Text('Molding'),
+                            ),
+                            DataColumn(
+                              label: Text('Crimping'),
+                            ),
+                            DataColumn(
+                              label: Text('Quality'),
+                            ),
+                            DataColumn(
+                              label: Text('Testing'),
+                            ),
+                          ],
+                          rows: state.infoList
+                              .map(
+                                (information) => DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(Text(information.taskName)),
+                                    DataCell(Text(information.winding)),
+                                    DataCell(Text(information.output)),
+                                    DataCell(Text(information.isolation)),
+                                    DataCell(Text(information.molding)),
+                                    DataCell(Text(information.crimping)),
+                                    DataCell(Text(information.quality)),
+                                    DataCell(Text(information.testing)),
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
