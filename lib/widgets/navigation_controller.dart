@@ -7,8 +7,8 @@ import 'package:popper/widgets/navigation_list.dart';
 class NavigationController extends StatelessWidget {
   static final screenList = [
     NavigationItemInfo(
-      icon: Icons.all_inbox,
-      title: 'Ячейки',
+      icon: Icons.article_outlined,
+      title: 'Список заданий',
       route: TasksPage.route,
       index: TasksPage.screenNumber,
     ),

@@ -21,8 +21,8 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
-  static const screenNumber = 2;
-  static const route = '/taskInfo';
+  static const screenNumber = InformationPage.screenNumber;
+  static const route = InformationPage.route;
 
   @override
   void initState() {
@@ -37,6 +37,7 @@ class _InformationPageState extends State<InformationPage> {
       screenIndex: screenNumber,
       title: 'Катушки',
       currentRoute: route,
+      headerWidget: SizedBox.shrink(),
       child: Column(
         children: [
           Expanded(

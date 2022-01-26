@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
-import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 
 class Header extends StatelessWidget {
   final String title;
+  final Widget headerWidget;
 
   const Header({
     Key? key,
     required this.title,
+    required this.headerWidget,
   }) : super(key: key);
 
   @override
@@ -22,12 +21,7 @@ class Header extends StatelessWidget {
         ),
         SizedBox(width: 50),
         Spacer(),
-        IconButton(
-          icon: Icon(Icons.replay),
-          onPressed: () {
-            BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
-          },
-        )
+        headerWidget,
       ],
     );
   }

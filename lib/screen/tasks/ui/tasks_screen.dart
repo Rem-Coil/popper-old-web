@@ -4,14 +4,15 @@ import 'package:popper/screen/base_mian%20screen.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'package:popper/screen/tasks/ui/task_information_screen.dart';
+import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
+import 'package:popper/screen/tasks/ui/tasks_dialog.dart';
 import 'package:popper/widgets/new_task_form.dart';
 import 'package:popper/widgets/search_form.dart';
 import 'package:popper/widgets/status_bar.dart';
 
 class TasksPage extends StatefulWidget {
   static const route = '/tasks';
-  static const screenNumber = 2;
+  static const screenNumber = 1;
 
   TasksPage({Key? key}) : super(key: key);
 
@@ -20,8 +21,8 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  static const route = '/tasks';
-  static const screenNumber = 1;
+  static const route = TasksPage.route;
+  static const screenNumber = TasksPage.screenNumber;
 
   @override
   void initState() {
@@ -36,6 +37,12 @@ class _TasksPageState extends State<TasksPage> {
       screenIndex: screenNumber,
       title: 'Список заданий',
       currentRoute: route,
+      headerWidget: IconButton(
+        icon: Icon(Icons.replay),
+        onPressed: () {
+          BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
+        },
+      ),
       child: Center(
         child: Column(
           children: [
@@ -92,10 +99,16 @@ class _TasksPageState extends State<TasksPage> {
                             rows: state.listBobinas.map((bobina) {
                               return DataRow(
                                 onSelectChanged: (_) {
-                                  Navigator.of(context).pushNamed(
-                                    InformationPage.route,
-                                    arguments: bobina.id,
-                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => BlocProvider(
+                                          child: TasksDialog(id: bobina.id),
+                                          create: (context) =>
+                                              TaskInformationBloc()));
+                                  // Navigator.of(context).pushNamed(
+                                  //   InformationPage.route,
+                                  //   arguments: bobina.id,
+                                  // );
                                 },
                                 cells: <DataCell>[
                                   DataCell(Text(bobina.taskName)),

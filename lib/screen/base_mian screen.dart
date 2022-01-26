@@ -5,20 +5,20 @@ import 'package:popper/screen/base_header.dart';
 import 'package:popper/widgets/navigation_controller.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:slot_service_app/ui/view_models/route.dart';
-
 class MainScreen extends StatelessWidget {
   final int screenIndex;
   final String title;
   final String currentRoute;
   final Widget child;
+  final Widget headerWidget;
 
   const MainScreen(
       {Key? key,
       required this.screenIndex,
       required this.title,
       required this.currentRoute,
-      required this.child})
+      required this.child,
+      required this.headerWidget})
       : super(key: key);
 
   @override
@@ -49,7 +49,9 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _getHeader() => Expanded(child: Header(title: title));
+  Widget _getHeader() => Expanded(
+        child: Header(title: title, headerWidget: headerWidget),
+      );
 
   Widget _getMainWidgetDecoration(BuildContext context) => Expanded(
         flex: 19,

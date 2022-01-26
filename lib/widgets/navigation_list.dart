@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:popper/models/navigation_model.dart';
 import 'package:popper/widgets/navigation_item.dart';
-// import 'package:slot_service_app/ui/navigation/widgets/navigation_item.dart';
-// import 'package:slot_service_app/ui/navigation/widgets/navigation_logo_item.dart';
-// import 'models/navigation_item_info.dart';
 import 'navigation_logo_item.dart';
 
 class NavigationList extends StatelessWidget {
