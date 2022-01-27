@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_event.dart';
 import 'package:popper/screen/tasks/bloc/task_information_state.dart';
-import 'package:popper/widgets/dialog.dart';
+import 'package:popper/widgets/fullscreen_dialog.dart';
 import 'package:popper/widgets/status_bar.dart';
 
 class TasksDialog extends StatefulWidget {
@@ -24,7 +24,6 @@ class _TasksDialogState extends State<TasksDialog> {
   @override
   void initState() {
     super.initState();
-    BlocProvider(create: (_) => TaskInformationBloc());
     BlocProvider.of<TaskInformationBloc>(context)
         .add(ShowTaskInformation(widget.id));
   }

@@ -26,7 +26,14 @@ class FullScreenDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _getTitle(context),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.start,
+              ),
+            ),
             Expanded(child: body),
             SizedBox(height: 16.0),
             Row(
@@ -35,17 +42,6 @@ class FullScreenDialog extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  _getTitle(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headline6,
-        textAlign: TextAlign.start,
       ),
     );
   }

@@ -21,22 +21,19 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  static const route = TasksPage.route;
-  static const screenNumber = TasksPage.screenNumber;
-
   @override
   void initState() {
     context.read<DataTableBloc>().add(ShowDataTable());
-    // BlocProvider.of<DataTableBloc>(context)
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MainScreen(
-      screenIndex: screenNumber,
+      screenIndex: TasksPage.screenNumber,
       title: 'Список заданий',
-      currentRoute: route,
+      currentRoute: TasksPage.route,
       headerWidget: IconButton(
         icon: Icon(Icons.replay),
         onPressed: () {
@@ -105,10 +102,6 @@ class _TasksPageState extends State<TasksPage> {
                                           child: TasksDialog(id: bobina.id),
                                           create: (context) =>
                                               TaskInformationBloc()));
-                                  // Navigator.of(context).pushNamed(
-                                  //   InformationPage.route,
-                                  //   arguments: bobina.id,
-                                  // );
                                 },
                                 cells: <DataCell>[
                                   DataCell(Text(bobina.taskName)),

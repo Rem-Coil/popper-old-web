@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/constants.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
-import 'package:popper/screen/tasks/ui/task_information_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
 
 void main() {
@@ -29,16 +27,6 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case TasksPage.route:
               return MaterialPageRoute(builder: (context) => TasksPage());
-            case InformationPage.route:
-              final id = settings.arguments as int;
-              return MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                  child: InformationPage(id: id),
-                  create: (context) {
-                    return TaskInformationBloc();
-                  },
-                ),
-              );
           }
         },
         // routes: {
