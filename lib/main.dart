@@ -29,10 +29,6 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (context) => TasksPage());
           }
         },
-        // routes: {
-        //   TasksPage.route: (_) => TasksPage(),
-        //   InformationPage.route: (_) => InformationPage(),
-        // },
         initialRoute: TasksPage.route,
       ),
     );
