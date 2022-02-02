@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popper/screen/base_mian%20screen.dart';
+import 'package:popper/screen/tasks/bloc/operators_bloc.dart';
+import 'package:popper/screen/tasks/bloc/operators_event.dart';
+import 'package:popper/screen/tasks/bloc/operators_state.dart';
+import 'package:popper/widgets/password.dart';
+import 'package:popper/widgets/status_bar.dart';
+
+class OperatorsScreen extends StatefulWidget {
+  static const route = '/operators';
+  static const screenNumber = 2;
+
+  OperatorsScreen({Key? key}) : super(key: key);
+
+  @override
+  _OperatorsScreenState createState() => _OperatorsScreenState();
+}
+
+class _OperatorsScreenState extends State<OperatorsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<OperatorsBloc>(context).add(ShowOperators());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    bool visible = true;
+    return MainScreen(
+      screenIndex: OperatorsScreen.screenNumber,
+      title: 'Сотрудники',
+      currentRoute: OperatorsScreen.route,
+      headerWidget: IconButton(
+        icon: Icon(Icons.replay),
+        onPressed: () {
+          BlocProvider.of<OperatorsBloc>(context).add(ShowOperators());
+        },
+      ),
+      child: Expanded(
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            child: BlocBuilder<OperatorsBloc, OperatorsState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    StatusBar(
+                      error: state.errorMessage,
+                      hasElements: state.listOperators.isNotEmpty,
+                      hasError: state.hasError,
+                      isLoad: state.isLoad,
+                    ),
+                    DataTable(
+                      showCheckboxColumn: false,
+                      columns: [
+                        DataColumn(
+                          label: Text('First Name'),
+                        ),
+                        DataColumn(
+                          label: Text('Second Name'),
+                        ),
+                        DataColumn(
+                          label: Text('Surname'),
+                        ),
+                        DataColumn(
+                          label: Text('Phone'),
+                        ),
+                        DataColumn(
+                          label: Text('Password'),
+                        ),
+                        DataColumn(
+                          label: Text('In work'),
+                        ),
+                      ],
+                      rows: state.listOperators.map((operator) {
+                        return DataRow(
+                          onSelectChanged: (_) {
+                            visible = visible == true ? false : true;
+                          },
+                          cells: <DataCell>[
+                            DataCell(Text(operator.firstName)),
+                            DataCell(Text(operator.secondName)),
+                            DataCell(Text(operator.surname)),
+                            DataCell(Text(operator.phone)),
+                            DataCell(Password(password: operator.password)),
+                            DataCell(Text(operator.active.toString())),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

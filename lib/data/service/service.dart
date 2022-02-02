@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:popper/models/action.dart';
 import 'package:popper/models/bobbin_information.dart';
 import 'package:popper/models/model.dart';
+import 'package:popper/models/operator.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'service.g.dart';
@@ -21,4 +22,7 @@ abstract class Service {
 
   @GET('/bobbin/task/{id}')
   Future<List<BobbinInformation>> getBobbinInformation(@Path("id") int id);
+
+  @GET('/operator')
+  Future<List<Operator>> getOperators();
 }
