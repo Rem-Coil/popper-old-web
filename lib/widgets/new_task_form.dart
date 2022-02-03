@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popper/constants.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/widgets/field.dart';
@@ -84,7 +85,8 @@ class _NewTaskFormState extends State<NewTaskForm> {
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: secondaryColor),
                       ),
                     ),
                   ),

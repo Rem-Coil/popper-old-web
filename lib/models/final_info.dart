@@ -1,4 +1,5 @@
 import 'package:popper/models/action.dart';
+import 'package:popper/models/bobbin_information.dart';
 
 class FinalInfo {
   static const noAuthorText = '---';
@@ -23,9 +24,9 @@ class FinalInfo {
     required this.testing,
   });
 
-  factory FinalInfo.empty(String taskName) {
+  factory FinalInfo.empty(BobbinInformation bobbin) {
     return FinalInfo(
-      taskName: taskName,
+      taskName: bobbin.bobbinNumber,
       winding: noAuthorText,
       output: noAuthorText,
       isolation: noAuthorText,

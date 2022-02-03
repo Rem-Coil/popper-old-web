@@ -4,11 +4,11 @@ part 'action.g.dart';
 
 @JsonSerializable()
 class Action {
-  @JsonKey(name: 'bobbin_id')
+  @JsonKey(name: 'bobbinId')
   final int bobbinId;
   @JsonKey(name: 'bobbin_number')
   final String bobbinNumber;
-  @JsonKey(name: 'first_name')
+  @JsonKey(name: 'firstname')
   final String firstname;
   @JsonKey(name: 'second_name')
   final String secondName;

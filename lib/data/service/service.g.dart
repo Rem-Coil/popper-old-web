@@ -31,18 +31,18 @@ class _Service implements Service {
   }
 
   @override
-  Future<AddedTask> postTask(map) async {
+  Future<TaskBobina> postTask(map) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(map);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AddedTask>(
+        _setStreamType<TaskBobina>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/task',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AddedTask.fromJson(_result.data!);
+    final value = TaskBobina.fromJson(_result.data!);
     return value;
   }
 
@@ -54,7 +54,7 @@ class _Service implements Service {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<Action>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/action/$id',
+                .compose(_dio.options, '/action/task/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
@@ -77,6 +77,23 @@ class _Service implements Service {
     var value = _result.data!
         .map((dynamic i) =>
             BobbinInformation.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<Operator>> getOperators() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<Operator>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/operator',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Operator.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

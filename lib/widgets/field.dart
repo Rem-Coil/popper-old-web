@@ -21,7 +21,7 @@ class Field extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(18.0),
         ),
       ),
     );

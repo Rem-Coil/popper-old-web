@@ -1,16 +1,15 @@
 import 'dart:io';
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:popper/core/error/failure.dart';
 import 'package:popper/data/service/service_provider.dart';
-import 'package:popper/models/model.dart';
-import 'package:popper/models/added_task.dart';
-import 'package:dartz/dartz.dart';
+import 'package:popper/models/operator.dart';
 
-class TaskRepository {
-  Future<Either<Failure, List<TaskBobina>>> getTasks() async {
+class OperatorRepository {
+  Future<Either<Failure, List<Operator>>> getOperators() async {
     try {
       final service = ApiProvider().getApiService();
-      final list = await service.getTable();
+      final list = await service.getOperators();
       return Right(list);
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
@@ -19,10 +18,5 @@ class TaskRepository {
       }
       return Left(UnknownFailure());
     }
-  }
-
-  Future<TaskBobina> addTask(AddedTask task) async {
-    final service = ApiProvider().getApiService();
-    return await service.postTask(task.toJson());
   }
 }

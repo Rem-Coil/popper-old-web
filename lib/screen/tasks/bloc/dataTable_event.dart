@@ -15,3 +15,9 @@ class CreateNewTask extends DataTableEvent {
       required this.numberOfTask,
       required this.totalNumber});
 }
+
+class UseFilter extends DataTableEvent {
+  final String filterWord;
+
+  UseFilter({required this.filterWord});
+}
