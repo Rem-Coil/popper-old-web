@@ -26,7 +26,6 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool visible = true;
     return MainScreen(
       screenIndex: OperatorsScreen.screenNumber,
       title: 'Сотрудники',
@@ -55,29 +54,26 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                       showCheckboxColumn: false,
                       columns: [
                         DataColumn(
-                          label: Text('First Name'),
+                          label: Text('Имя'),
                         ),
                         DataColumn(
-                          label: Text('Second Name'),
+                          label: Text('Фамилия'),
                         ),
                         DataColumn(
-                          label: Text('Surname'),
+                          label: Text('Отчество'),
                         ),
                         DataColumn(
-                          label: Text('Phone'),
+                          label: Text('Телефон'),
                         ),
                         DataColumn(
-                          label: Text('Password'),
+                          label: Text('Пароль'),
                         ),
                         DataColumn(
-                          label: Text('In work'),
+                          label: Text('В работе'),
                         ),
                       ],
                       rows: state.listOperators.map((operator) {
                         return DataRow(
-                          onSelectChanged: (_) {
-                            visible = visible == true ? false : true;
-                          },
                           cells: <DataCell>[
                             DataCell(Text(operator.firstName)),
                             DataCell(Text(operator.secondName)),
