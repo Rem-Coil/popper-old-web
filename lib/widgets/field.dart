@@ -19,10 +19,8 @@ class Field extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        disabledBorder: InputBorder.none,
         hintText: hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
       ),
     );
   }

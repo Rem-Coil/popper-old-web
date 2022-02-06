@@ -69,10 +69,12 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                           label: Text('Пароль'),
                         ),
                         DataColumn(
-                          label: Text('В работе'),
+                          label: Text(''),
                         ),
                       ],
-                      rows: state.listOperators.map((operator) {
+                      rows: state.listOperators
+                          .where((element) => element.active)
+                          .map((operator) {
                         return DataRow(
                           cells: <DataCell>[
                             DataCell(Text(operator.firstName)),
@@ -80,7 +82,15 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                             DataCell(Text(operator.surname)),
                             DataCell(Text(operator.phone)),
                             DataCell(Password(password: operator.password)),
-                            DataCell(Text(operator.active.toString())),
+                            DataCell(TextButton(
+                              child: Text('Удалить'),
+                              onPressed: () {
+                                setState(() {
+                                  BlocProvider.of<OperatorsBloc>(context)
+                                      .add(DeleteOperators(id: operator.id));
+                                });
+                              },
+                            ))
                           ],
                         );
                       }).toList(),

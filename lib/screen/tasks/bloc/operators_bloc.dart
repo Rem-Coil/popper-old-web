@@ -9,6 +9,7 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
 
   OperatorsBloc() : super(OperatorsState.initial()) {
     on<ShowOperators>(onShowOperators);
+    on<DeleteOperators>(onDeleteOperators);
   }
 
   Future<void> onShowOperators(
@@ -19,6 +20,13 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
         (failure) => state.error(failure.message),
         (operators) => state
             .create(operators..sort((Operator a, Operator b) => a.id - b.id)));
+    emit(newState);
+  }
+
+  Future<void> onDeleteOperators(
+      DeleteOperators event, Emitter<OperatorsState> emit) async {
+    final deletingOperator = await operatorRepository.deleteOperator(event.id);
+    final newState = state.deleteOperator(deletingOperator);
     emit(newState);
   }
 }

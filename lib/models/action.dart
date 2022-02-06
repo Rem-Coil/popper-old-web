@@ -32,5 +32,5 @@ class Action {
 
   Map<String, dynamic> toJson() => _$ActionToJson(this);
 
-  String get author => '$surname $firstname';
+  String get author => '$firstname $secondName';
 }

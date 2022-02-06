@@ -19,4 +19,15 @@ class OperatorRepository {
       return Left(UnknownFailure());
     }
   }
+
+  Future<int> deleteOperator(int id) async {
+    try {
+      final service = ApiProvider().getApiService();
+      await service.deleteOperator(id);
+      return id;
+    } on DioError catch (e) {
+      print(e);
+      return 0;
+    }
+  }
 }

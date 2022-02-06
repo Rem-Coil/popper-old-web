@@ -6,6 +6,7 @@ import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/ui/tasks_dialog.dart';
+import 'package:popper/widgets/adding_dialog.dart';
 import 'package:popper/widgets/new_task_form.dart';
 import 'package:popper/widgets/search_form.dart';
 import 'package:popper/widgets/status_bar.dart';
@@ -34,16 +35,33 @@ class _TasksPageState extends State<TasksPage> {
       screenIndex: TasksPage.screenNumber,
       title: 'Список заданий',
       currentRoute: TasksPage.route,
-      headerWidget: IconButton(
-        icon: Icon(Icons.replay),
-        onPressed: () {
-          BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
-        },
+      headerWidget: Row(
+        children: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AddingDialog(
+                  child: NewTaskForm(),
+                ),
+              );
+            },
+            child: Text('Добавить заказ'),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          IconButton(
+            icon: Icon(Icons.replay),
+            onPressed: () {
+              BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
+            },
+          ),
+        ],
       ),
       child: Center(
         child: Column(
           children: [
-            NewTaskForm(),
             SearchForm(),
             Expanded(
               child: SingleChildScrollView(
@@ -62,36 +80,16 @@ class _TasksPageState extends State<TasksPage> {
                           DataTable(
                             showCheckboxColumn: false,
                             columns: [
-                              DataColumn(
-                                label: Text('Name'),
-                              ),
-                              DataColumn(
-                                label: Text('Number'),
-                              ),
-                              DataColumn(
-                                label: Text('Count'),
-                              ),
-                              DataColumn(
-                                label: Text('Winding'),
-                              ),
-                              DataColumn(
-                                label: Text('Output'),
-                              ),
-                              DataColumn(
-                                label: Text('Isolation'),
-                              ),
-                              DataColumn(
-                                label: Text('Molding'),
-                              ),
-                              DataColumn(
-                                label: Text('Crimping'),
-                              ),
-                              DataColumn(
-                                label: Text('Quality'),
-                              ),
-                              DataColumn(
-                                label: Text('Testing'),
-                              ),
+                              DataColumn(label: Text('Name')),
+                              DataColumn(label: Text('Number')),
+                              DataColumn(label: Text('Count')),
+                              DataColumn(label: Text('Winding')),
+                              DataColumn(label: Text('Output')),
+                              DataColumn(label: Text('Isolation')),
+                              DataColumn(label: Text('Molding')),
+                              DataColumn(label: Text('Crimping')),
+                              DataColumn(label: Text('Quality')),
+                              DataColumn(label: Text('Testing')),
                             ],
                             rows: state.listBobinas.map((bobina) {
                               return DataRow(
