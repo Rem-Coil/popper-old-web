@@ -18,7 +18,9 @@ class NavigationItem extends StatelessWidget {
     return Container(
       decoration: isSelected ? _onSelectedDecoration() : null,
       child: ListTile(
-        onTap: () => Navigator.of(context).pushNamed(item.route),
+        onTap: () {
+          if (!isSelected) Navigator.of(context).pushNamed(item.route);
+        },
         horizontalTitleGap: 0.0,
         leading: _getLeading(theme),
         title: _getTitle(theme),

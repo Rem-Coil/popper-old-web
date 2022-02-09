@@ -4,3 +4,11 @@ import 'package:flutter/foundation.dart';
 class OperatorsEvent {}
 
 class ShowOperators extends OperatorsEvent {}
+
+class DeleteOperators extends OperatorsEvent {
+  final int id;
+
+  DeleteOperators({
+    required this.id,
+  });
+}

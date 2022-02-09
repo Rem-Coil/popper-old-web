@@ -36,59 +36,67 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
           BlocProvider.of<OperatorsBloc>(context).add(ShowOperators());
         },
       ),
-      child: Expanded(
-        child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            child: BlocBuilder<OperatorsBloc, OperatorsState>(
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    StatusBar(
-                      error: state.errorMessage,
-                      hasElements: state.listOperators.isNotEmpty,
-                      hasError: state.hasError,
-                      isLoad: state.isLoad,
-                    ),
-                    DataTable(
-                      showCheckboxColumn: false,
-                      columns: [
-                        DataColumn(
-                          label: Text('Имя'),
-                        ),
-                        DataColumn(
-                          label: Text('Фамилия'),
-                        ),
-                        DataColumn(
-                          label: Text('Отчество'),
-                        ),
-                        DataColumn(
-                          label: Text('Телефон'),
-                        ),
-                        DataColumn(
-                          label: Text('Пароль'),
-                        ),
-                        DataColumn(
-                          label: Text('В работе'),
-                        ),
-                      ],
-                      rows: state.listOperators.map((operator) {
-                        return DataRow(
-                          cells: <DataCell>[
-                            DataCell(Text(operator.firstName)),
-                            DataCell(Text(operator.secondName)),
-                            DataCell(Text(operator.surname)),
-                            DataCell(Text(operator.phone)),
-                            DataCell(Password(password: operator.password)),
-                            DataCell(Text(operator.active.toString())),
-                          ],
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                );
-              },
-            ),
+      child: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          child: BlocBuilder<OperatorsBloc, OperatorsState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  StatusBar(
+                    error: state.errorMessage,
+                    hasElements: state.listOperators.isNotEmpty,
+                    hasError: state.hasError,
+                    isLoad: state.isLoad,
+                  ),
+                  DataTable(
+                    showCheckboxColumn: false,
+                    columns: [
+                      DataColumn(
+                        label: Text('Имя'),
+                      ),
+                      DataColumn(
+                        label: Text('Фамилия'),
+                      ),
+                      DataColumn(
+                        label: Text('Отчество'),
+                      ),
+                      DataColumn(
+                        label: Text('Телефон'),
+                      ),
+                      DataColumn(
+                        label: Text('Пароль'),
+                      ),
+                      DataColumn(
+                        label: Text(''),
+                      ),
+                    ],
+                    rows: state.listOperators
+                        .where((element) => element.active)
+                        .map((operator) {
+                      return DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text(operator.firstName)),
+                          DataCell(Text(operator.secondName)),
+                          DataCell(Text(operator.surname)),
+                          DataCell(Text(operator.phone)),
+                          DataCell(Password(password: operator.password)),
+                          DataCell(TextButton(
+                            child: Text('Удалить'),
+                            onPressed: () {
+                              setState(() {
+                                BlocProvider.of<OperatorsBloc>(context)
+                                    .add(DeleteOperators(id: operator.id));
+                              });
+                            },
+                          ))
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

@@ -25,4 +25,7 @@ abstract class Service {
 
   @GET('/operator')
   Future<List<Operator>> getOperators();
+
+  @DELETE('/operator/{id}')
+  Future<void> deleteOperator(@Path("id") int id);
 }

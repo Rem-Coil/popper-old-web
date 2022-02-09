@@ -28,14 +28,19 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case TasksPage.route:
-              return MaterialPageRoute(builder: (context) => TasksPage());
+              return PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => TasksPage(),
+                transitionDuration: Duration(seconds: 0),
+              );
             case OperatorsScreen.route:
-              return MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                      child: OperatorsScreen(),
-                      create: (context) {
-                        return OperatorsBloc();
-                      }));
+              return PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => BlocProvider(
+                    child: OperatorsScreen(),
+                    create: (context) {
+                      return OperatorsBloc();
+                    }),
+                transitionDuration: Duration(seconds: 0),
+              );
           }
         },
         initialRoute: TasksPage.route,

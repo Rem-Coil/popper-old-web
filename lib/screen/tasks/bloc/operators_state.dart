@@ -12,14 +12,14 @@ class OperatorsState {
   factory OperatorsState.initial() =>
       OperatorsState._(false, null, List.empty());
 
-  OperatorsState load() => OperatorsState._(true, null, List.from(listOperators));
+  OperatorsState load() =>
+      OperatorsState._(true, null, List.from(listOperators));
 
   OperatorsState error(String errorMessage) =>
       OperatorsState._(false, errorMessage, List.from(listOperators));
 
-  OperatorsState create(List<Operator> list) =>
+  OperatorsState updateOperator(List<Operator> list) =>
       OperatorsState._(false, null, list);
-
 
   bool get hasError => errorMessage != null;
 }
