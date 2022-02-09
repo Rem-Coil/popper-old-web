@@ -25,8 +25,15 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
 
   Future<void> onDeleteOperators(
       DeleteOperators event, Emitter<OperatorsState> emit) async {
+    emit(state.load());
     final deletingOperator = await operatorRepository.deleteOperator(event.id);
-    final newState = state.deleteOperator(deletingOperator);
+    final newState = deletingOperator.fold(
+      (failure) => state.error(failure.message),
+      (deletingOperator) {
+        state.listOperators.removeWhere((element) => element.id == event.id);
+        return state.deleteOperator();
+      },
+    );
     emit(newState);
   }
 }

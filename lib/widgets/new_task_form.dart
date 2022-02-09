@@ -105,9 +105,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
                               totalNumber: int.parse(countController.text),
                             ),
                           );
-                        nameController.clear();
-                        numberController.clear();
-                        countController.clear();
+                        _formKey.currentState?.reset();
                       }
                     },
                   ),

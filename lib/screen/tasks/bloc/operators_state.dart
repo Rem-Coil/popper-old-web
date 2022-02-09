@@ -21,8 +21,7 @@ class OperatorsState {
   OperatorsState create(List<Operator> list) =>
       OperatorsState._(false, null, list);
 
-  OperatorsState deleteOperator(int id) {
-    listOperators.removeWhere((element) => element.id == id);
+  OperatorsState deleteOperator() {
     return OperatorsState._(false, null, List.from(listOperators));
   }
 

@@ -20,14 +20,17 @@ class OperatorRepository {
     }
   }
 
-  Future<int> deleteOperator(int id) async {
+  Future<Either<Failure, void>> deleteOperator(int id) async {
     try {
       final service = ApiProvider().getApiService();
       await service.deleteOperator(id);
-      return id;
+      return Right(null);
     } on DioError catch (e) {
-      print(e);
-      return 0;
+      switch (e.response?.statusCode) {
+        case HttpStatus.internalServerError:
+          return Left(ServerFailure());
+      }
+      return Left(UnknownFailure());
     }
   }
 }
