@@ -18,12 +18,8 @@ class OperatorsState {
   OperatorsState error(String errorMessage) =>
       OperatorsState._(false, errorMessage, List.from(listOperators));
 
-  OperatorsState create(List<Operator> list) =>
+  OperatorsState updateOperator(List<Operator> list) =>
       OperatorsState._(false, null, list);
-
-  OperatorsState deleteOperator() {
-    return OperatorsState._(false, null, List.from(listOperators));
-  }
 
   bool get hasError => errorMessage != null;
 }

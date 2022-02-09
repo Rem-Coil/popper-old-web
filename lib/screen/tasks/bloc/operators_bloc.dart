@@ -18,8 +18,8 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
     final operators = await operatorRepository.getOperators();
     final newState = operators.fold(
         (failure) => state.error(failure.message),
-        (operators) => state
-            .create(operators..sort((Operator a, Operator b) => a.id - b.id)));
+        (operators) => state.updateOperator(
+            operators..sort((Operator a, Operator b) => a.id - b.id)));
     emit(newState);
   }
 
@@ -29,9 +29,10 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
     final deletingOperator = await operatorRepository.deleteOperator(event.id);
     final newState = deletingOperator.fold(
       (failure) => state.error(failure.message),
-      (deletingOperator) {
-        state.listOperators.removeWhere((element) => element.id == event.id);
-        return state.deleteOperator();
+      (_) {
+        List<Operator> list = List.from(state.listOperators);
+        list.removeWhere((element) => element.id == event.id);
+        return state.updateOperator(list);
       },
     );
     emit(newState);
