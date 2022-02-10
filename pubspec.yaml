@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared_preferences: any
   flutter_bloc: ^7.3.0
   dio: ^4.0.0
   retrofit: ^2.0.1

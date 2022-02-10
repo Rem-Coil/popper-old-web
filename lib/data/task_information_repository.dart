@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 class TaskInformationRepository {
   Future<Either<Failure, List<Action>>> getActions(int id) async {
     try {
-      final service = ApiProvider().getApiService();
+      final service = await ApiProvider().getApiService();
       final list = await service.getActions(id);
       return Right(list);
     } on DioError catch (e) {
@@ -25,7 +25,7 @@ class TaskInformationRepository {
     int id,
   ) async {
     try {
-      final service = ApiProvider().getApiService();
+      final service = await ApiProvider().getApiService();
       final list = await service.getBobbinInformation(id);
       return Right(list);
     } on DioError catch (e) {

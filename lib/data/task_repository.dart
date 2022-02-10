@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 class TaskRepository {
   Future<Either<Failure, List<TaskBobina>>> getTasks() async {
     try {
-      final service = ApiProvider().getApiService();
+      final service = await ApiProvider().getApiService();
       final list = await service.getTable();
       return Right(list);
     } on DioError catch (e) {
@@ -22,7 +22,7 @@ class TaskRepository {
   }
 
   Future<TaskBobina> addTask(AddedTask task) async {
-    final service = ApiProvider().getApiService();
+    final service = await ApiProvider().getApiService();
     return await service.postTask(task.toJson());
   }
 }

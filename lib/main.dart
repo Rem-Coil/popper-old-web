@@ -4,6 +4,7 @@ import 'package:popper/constants.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
 import 'package:popper/screen/tasks/bloc/operators_bloc.dart';
 import 'package:popper/screen/tasks/ui/operators_screen.dart';
+import 'package:popper/screen/tasks/ui/settings_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
 
 void main() {
@@ -39,6 +40,12 @@ class MyApp extends StatelessWidget {
                     create: (context) {
                       return OperatorsBloc();
                     }),
+                transitionDuration: Duration(seconds: 0),
+              );
+            case SettingsScreen.route:
+              return PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) =>
+                    SettingsScreen(),
                 transitionDuration: Duration(seconds: 0),
               );
           }

@@ -8,7 +8,7 @@ import 'package:popper/models/operator.dart';
 class OperatorRepository {
   Future<Either<Failure, List<Operator>>> getOperators() async {
     try {
-      final service = ApiProvider().getApiService();
+      final service = await ApiProvider().getApiService();
       final list = await service.getOperators();
       return Right(list);
     } on DioError catch (e) {
@@ -22,7 +22,7 @@ class OperatorRepository {
 
   Future<Either<Failure, void>> deleteOperator(int id) async {
     try {
-      final service = ApiProvider().getApiService();
+      final service = await ApiProvider().getApiService();
       await service.deleteOperator(id);
       return Right(null);
     } on DioError catch (e) {
