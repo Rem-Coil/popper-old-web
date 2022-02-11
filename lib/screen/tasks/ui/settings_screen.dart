@@ -20,7 +20,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       title: 'Настройки',
       currentRoute: SettingsScreen.route,
       headerWidget: SizedBox.shrink(),
-      child: NetworkSettings(),
+      child: NetworkSettings(
+        title: 'Host:',
+      ),
     );
   }
 }

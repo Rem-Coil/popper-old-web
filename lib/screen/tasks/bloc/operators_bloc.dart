@@ -38,5 +38,3 @@ class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
     emit(newState);
   }
 }
-
-//network_settings
