@@ -1,11 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:popper/core/network/server_settings.dart';
 import 'package:popper/data/service/service.dart';
 
 class ApiProvider {
-  static const String baseUrl = 'https://popper-service.herokuapp.com';
-
   static ApiProvider? _instance;
   final Dio _dio = Dio();
 
@@ -18,17 +17,18 @@ class ApiProvider {
     return _instance!;
   }
 
-  Service getApiService() {
-    _dio.interceptors.add(LogInterceptor(
-      logPrint: _logPrint,
-      request: true,
-      requestHeader: true,
-      responseBody: true,
-      requestBody: true,
-      responseHeader: true,
-    ));
+  Future<Service> getApiService() async {
+    // _dio.interceptors.add(LogInterceptor(
+    //   logPrint: _logPrint,
+    //   request: true,
+    //   requestHeader: true,
+    //   responseBody: true,
+    //   requestBody: true,
+    //   responseHeader: true,
+    // ));
+    final currentServerType = await ServerSettings.getServerType();
 
-    return Service(_dio, baseUrl: baseUrl);
+    return Service(_dio, baseUrl: currentServerType.url);
   }
 
   void _logPrint(Object object) => log(object.toString());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:popper/models/navigation_model.dart';
 import 'package:popper/screen/tasks/ui/operators_screen.dart';
+import 'package:popper/screen/tasks/ui/settings_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
 import 'package:popper/widgets/navigation_list.dart';
 
@@ -17,6 +18,12 @@ class NavigationController extends StatelessWidget {
       title: 'Сотрудники',
       route: OperatorsScreen.route,
       index: OperatorsScreen.screenNumber,
+    ),
+    NavigationItemInfo(
+      icon: Icons.settings,
+      title: 'Настройки',
+      route: SettingsScreen.route,
+      index: SettingsScreen.screenNumber,
     ),
   ];
 

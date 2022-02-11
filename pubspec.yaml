@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+
+  shared_preferences: any
   flutter_bloc: ^7.3.0
   dio: ^4.0.0
   retrofit: ^2.0.1
@@ -35,10 +37,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_native_splash: any
   retrofit_generator: any
   build_runner: any
   json_serializable: any
 
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/logo.png
+  web: true
 
 flutter:
 
