@@ -22,7 +22,7 @@ extension ServerTypeExtension on ServerType {
   String get url {
     switch (this) {
       case ServerType.LIVE:
-        return 'https://prod.remcoil.space';
+        return 'https://webpanel.remcoil.space';
       case ServerType.STAGE:
         return 'https://popper-service.herokuapp.com';
     }
