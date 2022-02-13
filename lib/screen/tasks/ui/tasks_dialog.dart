@@ -55,28 +55,28 @@ class _TasksDialogState extends State<TasksDialog> {
                   DataTable(
                     columns: [
                       DataColumn(
-                        label: Text('Name'),
+                        label: Text('Номер'),
                       ),
                       DataColumn(
-                        label: Text('Winding'),
+                        label: Text('Намотка'),
                       ),
                       DataColumn(
-                        label: Text('Output'),
+                        label: Text('Вывод'),
                       ),
                       DataColumn(
-                        label: Text('Isolation'),
+                        label: Text('Изолировка'),
                       ),
                       DataColumn(
-                        label: Text('Molding'),
+                        label: Text('Формовка'),
                       ),
                       DataColumn(
-                        label: Text('Crimping'),
+                        label: Text('Опрессовка'),
                       ),
                       DataColumn(
-                        label: Text('Quality'),
+                        label: Text('ОТК'),
                       ),
                       DataColumn(
-                        label: Text('Testing'),
+                        label: Text('Испытания'),
                       ),
                     ],
                     rows: state.infoList
