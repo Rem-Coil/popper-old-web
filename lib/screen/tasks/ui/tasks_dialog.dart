@@ -44,7 +44,7 @@ class _TasksDialogState extends State<TasksDialog> {
           child: BlocBuilder<TaskInformationBloc, TaskInformationState>(
             builder: (context, state) {
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   StatusBar(
                     error: state.errorMessage,
@@ -54,30 +54,14 @@ class _TasksDialogState extends State<TasksDialog> {
                   ),
                   DataTable(
                     columns: [
-                      DataColumn(
-                        label: Text('Номер'),
-                      ),
-                      DataColumn(
-                        label: Text('Намотка'),
-                      ),
-                      DataColumn(
-                        label: Text('Вывод'),
-                      ),
-                      DataColumn(
-                        label: Text('Изолировка'),
-                      ),
-                      DataColumn(
-                        label: Text('Формовка'),
-                      ),
-                      DataColumn(
-                        label: Text('Опрессовка'),
-                      ),
-                      DataColumn(
-                        label: Text('ОТК'),
-                      ),
-                      DataColumn(
-                        label: Text('Испытания'),
-                      ),
+                      DataColumn(label: Text('Номер')),
+                      DataColumn(label: Text('Намотка')),
+                      DataColumn(label: Text('Вывод')),
+                      DataColumn(label: Text('Изолировка')),
+                      DataColumn(label: Text('Формовка')),
+                      DataColumn(label: Text('Опрессовка')),
+                      DataColumn(label: Text('ОТК')),
+                      DataColumn(label: Text('Испытания')),
                     ],
                     rows: state.infoList
                         .map(

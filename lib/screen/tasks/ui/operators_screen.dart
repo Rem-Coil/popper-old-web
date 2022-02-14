@@ -42,6 +42,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
           child: BlocBuilder<OperatorsBloc, OperatorsState>(
             builder: (context, state) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   StatusBar(
                     error: state.errorMessage,
@@ -52,24 +53,12 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                   DataTable(
                     showCheckboxColumn: false,
                     columns: [
-                      DataColumn(
-                        label: Text('Имя'),
-                      ),
-                      DataColumn(
-                        label: Text('Фамилия'),
-                      ),
-                      DataColumn(
-                        label: Text('Отчество'),
-                      ),
-                      DataColumn(
-                        label: Text('Телефон'),
-                      ),
-                      DataColumn(
-                        label: Text('Пароль'),
-                      ),
-                      DataColumn(
-                        label: Text(''),
-                      ),
+                      DataColumn(label: Text('Имя')),
+                      DataColumn(label: Text('Фамилия')),
+                      DataColumn(label: Text('Отчество')),
+                      DataColumn(label: Text('Телефон')),
+                      DataColumn(label: Text('Пароль')),
+                      DataColumn(label: Text('')),
                     ],
                     rows: state.listOperators
                         .where((element) => element.active)

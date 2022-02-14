@@ -35,34 +35,38 @@ class _TasksPageState extends State<TasksPage> {
       screenIndex: TasksPage.screenNumber,
       title: 'Список заданий',
       currentRoute: TasksPage.route,
-      headerWidget: Row(
-        children: [
-          TextButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AddingDialog(
-                  child: NewTaskForm(),
-                ),
-              );
-            },
-            child: Text('Добавить заказ'),
-          ),
-          SizedBox(
-            width: 20.0,
-          ),
-          IconButton(
-            icon: Icon(Icons.replay),
-            onPressed: () {
-              BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
-            },
-          ),
-        ],
+      headerWidget: IconButton(
+        icon: Icon(Icons.replay),
+        onPressed: () {
+          BlocProvider.of<DataTableBloc>(context).add(ShowDataTable());
+        },
       ),
       child: Center(
         child: Column(
           children: [
-            SearchForm(),
+            Row(
+              children: [
+                Expanded(
+                  child: SearchForm(),
+                  flex: 9,
+                ),
+                Expanded(
+                  child: FloatingActionButton(
+                    mini: true,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AddingDialog(
+                          child: NewTaskForm(),
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.add),
+                  ),
+                  flex: 1,
+                )
+              ],
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
@@ -70,6 +74,7 @@ class _TasksPageState extends State<TasksPage> {
                   child: BlocBuilder<DataTableBloc, DataTableState>(
                     builder: (context, state) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           StatusBar(
                             error: state.errorMessage,
@@ -80,16 +85,16 @@ class _TasksPageState extends State<TasksPage> {
                           DataTable(
                             showCheckboxColumn: false,
                             columns: [
-                              DataColumn(label: Text('Name')),
-                              DataColumn(label: Text('Number')),
-                              DataColumn(label: Text('Count')),
-                              DataColumn(label: Text('Winding')),
-                              DataColumn(label: Text('Output')),
-                              DataColumn(label: Text('Isolation')),
-                              DataColumn(label: Text('Molding')),
-                              DataColumn(label: Text('Crimping')),
-                              DataColumn(label: Text('Quality')),
-                              DataColumn(label: Text('Testing')),
+                              DataColumn(label: Text('Имя')),
+                              DataColumn(label: Text('Номер')),
+                              DataColumn(label: Text('Количество')),
+                              DataColumn(label: Text('Намотка')),
+                              DataColumn(label: Text('Вывод')),
+                              DataColumn(label: Text('Изолировка')),
+                              DataColumn(label: Text('Формовка')),
+                              DataColumn(label: Text('Опрессовка')),
+                              DataColumn(label: Text('ОТК')),
+                              DataColumn(label: Text('Испытания')),
                             ],
                             rows: state.listBobinas.map((bobina) {
                               return DataRow(
