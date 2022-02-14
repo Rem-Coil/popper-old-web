@@ -6,11 +6,13 @@ class Field extends StatelessWidget {
     required this.hintText,
     required this.controller,
     required this.validator,
+    this.prefixIcon,
   }) : super(key: key);
 
   final String hintText;
   final TextEditingController controller;
   final FormFieldValidator<String> validator;
+  final Icon? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class Field extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        prefixIcon: prefixIcon,
         disabledBorder: InputBorder.none,
         hintText: hintText,
       ),

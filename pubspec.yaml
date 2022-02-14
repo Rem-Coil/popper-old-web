@@ -44,8 +44,11 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/logo.png
+  image: assets/images/logo1000.png
   web: true
+  ios: false
+  android: false
+  web_image_mode: center
 
 flutter:
 

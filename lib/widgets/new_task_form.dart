@@ -30,7 +30,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
   Widget build(BuildContext context) {
     return Container(
       width: 200.0,
-      height: 280.0,
+      height: 300.0,
       child: Form(
         key: _formKey,
         child: Padding(
@@ -38,6 +38,14 @@ class _NewTaskFormState extends State<NewTaskForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                width: double.infinity,
+                child: Text(
+                  'Новое задание',
+                  textAlign: TextAlign.center,
+                  textScaleFactor: 1.5,
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -76,15 +84,13 @@ class _NewTaskFormState extends State<NewTaskForm> {
               ),
               Container(
                 width: double.infinity,
+                height: 60.0,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-                        'Добавить',
-                        style: TextStyle(fontSize: 20),
-                      ),
+                    child: Text(
+                      'Добавить',
+                      style: TextStyle(fontSize: 20),
                     ),
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(

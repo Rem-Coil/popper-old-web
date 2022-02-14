@@ -43,6 +43,7 @@ class _SearchFormState extends State<SearchForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Field(
+                  prefixIcon: Icon(Icons.search),
                   controller: searchingController,
                   validator: (value) => null,
                   hintText: 'Введите имя для поиска',
