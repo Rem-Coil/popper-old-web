@@ -17,7 +17,7 @@ class DataTableState {
   DataTableState error(String errorMessage) =>
       DataTableState._(false, errorMessage, List.from(listBobinas));
 
-  DataTableState create(List<TaskBobina> list) =>
+  DataTableState updateTasks(List<TaskBobina> list) =>
       DataTableState._(false, null, list);
 
   DataTableState addTask(TaskBobina task) =>

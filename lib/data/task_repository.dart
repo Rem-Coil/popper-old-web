@@ -25,4 +25,18 @@ class TaskRepository {
     final service = await ApiProvider().getApiService();
     return await service.postTask(task.toJson());
   }
+
+  Future<Either<Failure, void>> deleteTask(int id) async {
+    try {
+      final service = await ApiProvider().getApiService();
+      await service.deleteTask(id);
+      return Right(null);
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case HttpStatus.internalServerError:
+          return Left(ServerFailure());
+      }
+      return Left(UnknownFailure());
+    }
+  }
 }
