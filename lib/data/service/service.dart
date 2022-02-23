@@ -28,4 +28,7 @@ abstract class Service {
 
   @DELETE('/operator/{id}')
   Future<void> deleteOperator(@Path("id") int id);
+
+  @DELETE('/task/{id}')
+  Future<void> deleteTask(@Path("id") int id);
 }

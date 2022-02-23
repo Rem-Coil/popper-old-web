@@ -21,3 +21,9 @@ class UseFilter extends DataTableEvent {
 
   UseFilter({required this.filterWord});
 }
+
+class DeleteTask extends DataTableEvent {
+  final int id;
+
+  DeleteTask({required this.id});
+}
