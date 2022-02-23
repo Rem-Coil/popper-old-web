@@ -37,6 +37,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  url_launcher: any
   flutter_native_splash: any
   retrofit_generator: any
   build_runner: any

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popper/core/network/server_settings.dart';
 import 'package:popper/screen/base_mian%20screen.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
@@ -11,6 +11,7 @@ import 'package:popper/widgets/adding_dialog.dart';
 import 'package:popper/widgets/new_task_form.dart';
 import 'package:popper/widgets/search_form.dart';
 import 'package:popper/widgets/status_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TasksPage extends StatefulWidget {
   static const route = '/tasks';
@@ -106,6 +107,7 @@ class _TasksPageState extends State<TasksPage> {
                               DataColumn(label: Text('ОТК')),
                               DataColumn(label: Text('Испытания')),
                               DataColumn(label: Text('')),
+                              DataColumn(label: Text('')),
                             ],
                             rows: state.listBobinas.map((bobina) {
                               return DataRow(
@@ -137,6 +139,19 @@ class _TasksPageState extends State<TasksPage> {
                                       child: Text(bobina.quality.toString()))),
                                   DataCell(Center(
                                       child: Text(bobina.testing.toString()))),
+                                  DataCell(IconButton(
+                                    icon: Icon(Icons.qr_code),
+                                    color: Colors.black38,
+                                    splashRadius: 15.0,
+                                    onPressed: () async {
+                                      final currentServerType =
+                                          await ServerSettings.getServerType();
+                                      String url = currentServerType.url +
+                                          '/bobbin/codes/${bobina.id}';
+                                      if (!await launch(url))
+                                        throw 'Could not launch $url';
+                                    },
+                                  )),
                                   DataCell(IconButton(
                                     icon: Icon(Icons.delete),
                                     iconSize: 20.0,
