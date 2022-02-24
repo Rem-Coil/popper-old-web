@@ -1,17 +1,18 @@
 import 'package:popper/models/action.dart';
 import 'package:popper/models/bobbin_information.dart';
+import 'package:popper/models/successful_fields.dart';
 
 class FinalInfo {
   static const noAuthorText = '---';
 
   final String taskName;
-  final String winding;
-  final String output;
-  final String isolation;
-  final String molding;
-  final String crimping;
-  final String quality;
-  final String testing;
+  final successfulFields winding;
+  final successfulFields output;
+  final successfulFields isolation;
+  final successfulFields molding;
+  final successfulFields crimping;
+  final successfulFields quality;
+  final successfulFields testing;
 
   FinalInfo({
     required this.taskName,
@@ -27,45 +28,59 @@ class FinalInfo {
   factory FinalInfo.empty(BobbinInformation bobbin) {
     return FinalInfo(
       taskName: bobbin.bobbinNumber,
-      winding: noAuthorText,
-      output: noAuthorText,
-      isolation: noAuthorText,
-      molding: noAuthorText,
-      crimping: noAuthorText,
-      quality: noAuthorText,
-      testing: noAuthorText,
+      winding: successfulFields(fieldName: noAuthorText, success: true),
+      output: successfulFields(fieldName: noAuthorText, success: true),
+      isolation: successfulFields(fieldName: noAuthorText, success: true),
+      molding: successfulFields(fieldName: noAuthorText, success: true),
+      crimping: successfulFields(fieldName: noAuthorText, success: true),
+      quality: successfulFields(fieldName: noAuthorText, success: true),
+      testing: successfulFields(fieldName: noAuthorText, success: true),
     );
   }
 
   FinalInfo update(Action action) {
     switch (action.actionType) {
       case 'winding':
-        return copyWith(winding: action.author);
+        return copyWith(
+            winding: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'output':
-        return copyWith(output: action.author);
+        return copyWith(
+            output: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'isolation':
-        return copyWith(isolation: action.author);
+        return copyWith(
+            isolation: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'molding':
-        return copyWith(molding: action.author);
+        return copyWith(
+            molding: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'crimping':
-        return copyWith(crimping: action.author);
+        return copyWith(
+            crimping: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'quality':
-        return copyWith(quality: action.author);
+        return copyWith(
+            quality: successfulFields(
+                fieldName: action.author, success: action.successful));
       case 'testing':
-        return copyWith(testing: action.author);
+        return copyWith(
+            testing: successfulFields(
+                fieldName: action.author, success: action.successful));
       default:
         return this;
     }
   }
 
   FinalInfo copyWith(
-      {String? winding,
-      String? output,
-      String? isolation,
-      String? molding,
-      String? crimping,
-      String? quality,
-      String? testing}) {
+      {successfulFields? winding,
+      successfulFields? output,
+      successfulFields? isolation,
+      successfulFields? molding,
+      successfulFields? crimping,
+      successfulFields? quality,
+      successfulFields? testing}) {
     return FinalInfo(
       taskName: taskName,
       winding: winding ?? this.winding,

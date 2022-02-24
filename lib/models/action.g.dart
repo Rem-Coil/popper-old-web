@@ -15,6 +15,7 @@ Action _$ActionFromJson(Map<String, dynamic> json) {
     surname: json['surname'] as String,
     actionType: json['action_type'] as String,
     doneTime: json['done_time'] as String,
+    successful: json['successful'] as bool,
   );
 }
 
@@ -26,4 +27,5 @@ Map<String, dynamic> _$ActionToJson(Action instance) => <String, dynamic>{
       'surname': instance.surname,
       'action_type': instance.actionType,
       'done_time': instance.doneTime,
+      'successful': instance.successful,
     };

@@ -68,13 +68,55 @@ class _TasksDialogState extends State<TasksDialog> {
                           (information) => DataRow(
                             cells: <DataCell>[
                               DataCell(Text(information.taskName)),
-                              DataCell(Text(information.winding)),
-                              DataCell(Text(information.output)),
-                              DataCell(Text(information.isolation)),
-                              DataCell(Text(information.molding)),
-                              DataCell(Text(information.crimping)),
-                              DataCell(Text(information.quality)),
-                              DataCell(Text(information.testing)),
+                              DataCell(Text(
+                                information.winding.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.output.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.isolation.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.molding.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.crimping.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.quality.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
+                              DataCell(Text(
+                                information.testing.fieldName,
+                                style: TextStyle(
+                                    backgroundColor: information.winding.success
+                                        ? Colors.white
+                                        : Colors.redAccent),
+                              )),
                             ],
                           ),
                         )
