@@ -78,42 +78,44 @@ class _TasksDialogState extends State<TasksDialog> {
                               DataCell(Text(
                                 information.output.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
+                                    backgroundColor: information.output.success
                                         ? Colors.white
                                         : Colors.redAccent),
                               )),
                               DataCell(Text(
                                 information.isolation.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
-                                        ? Colors.white
-                                        : Colors.redAccent),
+                                    backgroundColor:
+                                        information.isolation.success
+                                            ? Colors.white
+                                            : Colors.redAccent),
                               )),
                               DataCell(Text(
                                 information.molding.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
+                                    backgroundColor: information.molding.success
                                         ? Colors.white
                                         : Colors.redAccent),
                               )),
                               DataCell(Text(
                                 information.crimping.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
-                                        ? Colors.white
-                                        : Colors.redAccent),
+                                    backgroundColor:
+                                        information.crimping.success
+                                            ? Colors.white
+                                            : Colors.redAccent),
                               )),
                               DataCell(Text(
                                 information.quality.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
+                                    backgroundColor: information.quality.success
                                         ? Colors.white
                                         : Colors.redAccent),
                               )),
                               DataCell(Text(
                                 information.testing.fieldName,
                                 style: TextStyle(
-                                    backgroundColor: information.winding.success
+                                    backgroundColor: information.testing.success
                                         ? Colors.white
                                         : Colors.redAccent),
                               )),
