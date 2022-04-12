@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:popper/core/error/failure.dart';
-import 'package:popper/data/service/service_provider.dart';
+import 'package:popper/data/service/api_provider.dart';
 import 'package:popper/models/action.dart';
 import 'package:popper/models/bobbin_information.dart';
 import 'package:dartz/dartz.dart';

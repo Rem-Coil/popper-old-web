@@ -16,7 +16,7 @@ class DeleteDuplicateUseCase {
         actions.forEach((action) {
           String key = action.bobbinId.toString() + action.actionType;
           if (!numberAction.containsKey(key)) {
-            numberAction.addAll({key: action});
+            numberAction[key] = action;
           } else {
             if (!numberAction[key]!.successful) {
               numberAction[key] = action;

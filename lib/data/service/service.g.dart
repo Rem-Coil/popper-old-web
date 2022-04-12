@@ -31,7 +31,7 @@ class _Service implements Service {
   }
 
   @override
-  Future<TaskBobina> postTask(map) async {
+  Future<TaskBobina> addTask(map) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};

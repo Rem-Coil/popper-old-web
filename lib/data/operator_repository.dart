@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:popper/core/error/failure.dart';
-import 'package:popper/data/service/service_provider.dart';
+import 'package:popper/data/service/api_provider.dart';
 import 'package:popper/models/operator.dart';
 
 class OperatorRepository {
