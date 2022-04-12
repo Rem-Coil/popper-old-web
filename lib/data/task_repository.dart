@@ -21,9 +21,18 @@ class TaskRepository {
     }
   }
 
-  Future<TaskBobina> addTask(AddedTask task) async {
-    final service = await ApiProvider().getApiService();
-    return await service.addTask(task.toJson());
+  Future<Either<Failure, TaskBobina>> addTask(AddedTask task) async {
+    try {
+      final service = await ApiProvider().getApiService();
+      final addedTask = await service.addTask(task.toJson());
+      return Right(addedTask);
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case HttpStatus.internalServerError:
+          return Left(ServerFailure());
+      }
+      return Left(UnknownFailure());
+    }
   }
 
   Future<Either<Failure, void>> deleteTask(int id) async {
