@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:popper/models/navigation_model.dart';
-import 'package:popper/screen/tasks/ui/operators_screen.dart';
-import 'package:popper/screen/tasks/ui/settings_screen.dart';
+import 'package:popper/widgets/navigation/navigation_model.dart';
+import 'package:popper/screen/operators/ui/operators_screen.dart';
+import 'package:popper/screen/settings/ui/settings_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
-import 'package:popper/widgets/navigation_list.dart';
+import 'package:popper/widgets/navigation/navigation_list.dart';
 
 class NavigationController extends StatelessWidget {
   static final screenList = [

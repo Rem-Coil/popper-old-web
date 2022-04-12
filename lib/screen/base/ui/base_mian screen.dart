@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:popper/constants.dart';
-import 'package:popper/models/route.dart';
-import 'package:popper/screen/base_header.dart';
-import 'package:popper/widgets/navigation_controller.dart';
+import 'package:popper/widgets/navigation/route.dart';
+import 'package:popper/screen/base/ui/base_header.dart';
+import 'package:popper/widgets/navigation/navigation_controller.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {

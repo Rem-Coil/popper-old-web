@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:popper/models/navigation_model.dart';
+import 'package:popper/widgets/navigation/navigation_model.dart';
 
 class NavigationItem extends StatelessWidget {
   final NavigationItemInfo item;

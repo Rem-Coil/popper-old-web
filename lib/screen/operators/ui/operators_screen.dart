@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/base_mian%20screen.dart';
-import 'package:popper/screen/tasks/bloc/operators_bloc.dart';
-import 'package:popper/screen/tasks/bloc/operators_event.dart';
-import 'package:popper/screen/tasks/bloc/operators_state.dart';
+import 'package:popper/screen/base/ui/base_mian%20screen.dart';
+import 'package:popper/screen/operators/bloc/operators_bloc.dart';
+import 'package:popper/screen/operators/bloc/operators_event.dart';
+import 'package:popper/screen/operators/bloc/operators_state.dart';
 import 'package:popper/widgets/password.dart';
 import 'package:popper/widgets/status_bar.dart';
 

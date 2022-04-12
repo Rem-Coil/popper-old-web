@@ -34,7 +34,6 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
       quantity: event.totalNumber,
     );
     final addedBobina = await tasksRepository.addTask(addedTask);
-
     final newState = addedBobina.fold((failure) => state.error(failure.message),
         (addedBobbin) => state.addTask(addedBobbin));
     emit(newState);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/core/network/server_settings.dart';
-import 'package:popper/screen/base_mian%20screen.dart';
+import 'package:popper/screen/base/ui/base_mian%20screen.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
 import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
+import 'package:popper/screen/task_information/bloc/task_information_bloc.dart';
 import 'package:popper/screen/tasks/ui/tasks_dialog.dart';
 import 'package:popper/widgets/adding_dialog.dart';
 import 'package:popper/widgets/new_task_form.dart';

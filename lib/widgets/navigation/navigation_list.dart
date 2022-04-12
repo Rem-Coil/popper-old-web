@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:popper/models/navigation_model.dart';
-import 'package:popper/widgets/navigation_item.dart';
+import 'package:popper/widgets/navigation/navigation_model.dart';
+import 'package:popper/widgets/navigation/navigation_item.dart';
 import 'navigation_logo_item.dart';
 
 class NavigationList extends StatelessWidget {

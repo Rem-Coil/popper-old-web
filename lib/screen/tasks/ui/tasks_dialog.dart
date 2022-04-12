@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_event.dart';
-import 'package:popper/screen/tasks/bloc/task_information_state.dart';
+import 'package:popper/screen/task_information/bloc/task_information_bloc.dart';
+import 'package:popper/screen/task_information/bloc/task_information_event.dart';
+import 'package:popper/screen/task_information/bloc/task_information_state.dart';
 import 'package:popper/widgets/autor_box.dart';
 import 'package:popper/widgets/fullscreen_dialog.dart';
 import 'package:popper/widgets/status_bar.dart';

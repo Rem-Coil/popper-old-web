@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/constants.dart';
 import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'package:popper/screen/tasks/bloc/operators_bloc.dart';
-import 'package:popper/screen/tasks/ui/operators_screen.dart';
-import 'package:popper/screen/tasks/ui/settings_screen.dart';
+import 'package:popper/screen/operators/bloc/operators_bloc.dart';
+import 'package:popper/screen/operators/ui/operators_screen.dart';
+import 'package:popper/screen/settings/ui/settings_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
 
 void main() {

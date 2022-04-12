@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:popper/screen/base_mian%20screen.dart';
+import 'package:popper/screen/base/ui/base_mian%20screen.dart';
 import 'package:popper/widgets/network_settings.dart';
 
 class SettingsScreen extends StatefulWidget {
