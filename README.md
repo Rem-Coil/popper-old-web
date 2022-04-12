@@ -1,16 +1,16 @@
-# popper
+# REM COIL client
 
-Rem&Coil app
+## Десктоп приложение
 
-## Getting Started
+### Текущий функционал:
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Работа с катушками
+    * Получение всех
+    * Получение по ID/ID ТЗ
+* Работа с ТЗ
+    * Добавление/удаление ТЗ
+    * Получение всех ТЗ/по id
+* Работа c сотрудниками
+    * Получение всей информации о сотрудниках
+* Робота с операциями
+    * Получение операций (всех/по ID катушки/по ID ТЗ)

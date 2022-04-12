@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:popper/core/network/server_settings.dart';
 
-import '../../../constants.dart';
+import '../../../../../../constants.dart';
 
 class NetworkSettings extends StatefulWidget {
   final String title;

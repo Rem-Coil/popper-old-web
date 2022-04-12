@@ -17,6 +17,7 @@ class Action {
   final String actionType;
   @JsonKey(name: 'done_time')
   final String doneTime;
+  final bool successful;
 
   Action({
     required this.bobbinId,
@@ -26,6 +27,7 @@ class Action {
     required this.surname,
     required this.actionType,
     required this.doneTime,
+    required this.successful,
   });
 
   factory Action.fromJson(Map<String, dynamic> json) => _$ActionFromJson(json);

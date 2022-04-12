@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_bloc.dart';
-import 'package:popper/screen/tasks/bloc/task_information_event.dart';
-import 'package:popper/screen/tasks/bloc/task_information_state.dart';
+import 'package:popper/screen/task_information/bloc/task_information_bloc.dart';
+import 'package:popper/screen/task_information/bloc/task_information_event.dart';
+import 'package:popper/screen/task_information/bloc/task_information_state.dart';
+import 'package:popper/widgets/autor_box.dart';
 import 'package:popper/widgets/fullscreen_dialog.dart';
 import 'package:popper/widgets/status_bar.dart';
 
@@ -53,6 +54,7 @@ class _TasksDialogState extends State<TasksDialog> {
                     isLoad: state.isLoad,
                   ),
                   DataTable(
+                    columnSpacing: 15.0,
                     columns: [
                       DataColumn(label: Text('Номер')),
                       DataColumn(label: Text('Намотка')),
@@ -68,13 +70,15 @@ class _TasksDialogState extends State<TasksDialog> {
                           (information) => DataRow(
                             cells: <DataCell>[
                               DataCell(Text(information.taskName)),
-                              DataCell(Text(information.winding)),
-                              DataCell(Text(information.output)),
-                              DataCell(Text(information.isolation)),
-                              DataCell(Text(information.molding)),
-                              DataCell(Text(information.crimping)),
-                              DataCell(Text(information.quality)),
-                              DataCell(Text(information.testing)),
+                              DataCell(AuthorBox(boxData: information.winding)),
+                              DataCell(AuthorBox(boxData: information.output)),
+                              DataCell(
+                                  AuthorBox(boxData: information.isolation)),
+                              DataCell(AuthorBox(boxData: information.molding)),
+                              DataCell(
+                                  AuthorBox(boxData: information.crimping)),
+                              DataCell(AuthorBox(boxData: information.quality)),
+                              DataCell(AuthorBox(boxData: information.testing)),
                             ],
                           ),
                         )
