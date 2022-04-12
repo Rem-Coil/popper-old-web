@@ -1,22 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/models/model.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_state.dart';
+import 'package:popper/screen/tasks/bloc/tasks_event.dart';
+import 'package:popper/screen/tasks/bloc/tasks_state.dart';
 import 'package:popper/models/added_task.dart';
 import 'package:popper/data/task_repository.dart';
 
-class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
+class TasksBloc extends Bloc<TasksEvent, TasksState> {
   final TaskRepository tasksRepository = TaskRepository();
 
-  DataTableBloc() : super(DataTableState.initial()) {
-    on<ShowDataTable>(onGetTasks);
-    on<CreateNewTask>(onCreateNewTask);
+  TasksBloc() : super(TasksState.initial()) {
+    on<GetTasks>(onGetTasks);
+    on<CreateTask>(onCreateTask);
     on<UseFilter>(onUseFilter);
     on<DeleteTask>(onDeleteTask);
   }
 
-  Future<void> onGetTasks(
-      ShowDataTable event, Emitter<DataTableState> emit) async {
+  Future<void> onGetTasks(GetTasks event, Emitter<TasksState> emit) async {
     emit(state.load());
     final tasks = await tasksRepository.getTasks();
     final newState = tasks.fold(
@@ -26,21 +25,25 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
     emit(newState);
   }
 
-  Future<void> onCreateNewTask(
-      CreateNewTask event, Emitter<DataTableState> emit) async {
+  Future<void> onCreateTask(CreateTask event, Emitter<TasksState> emit) async {
     AddedTask addedTask = AddedTask(
       taskName: event.nameOfTask,
       taskNumber: event.numberOfTask,
       quantity: event.totalNumber,
     );
     final addedBobina = await tasksRepository.addTask(addedTask);
-    final newState = addedBobina.fold((failure) => state.error(failure.message),
-        (addedBobbin) => state.addTask(addedBobbin));
+    final newState = addedBobina.fold(
+      (failure) => state.error(failure.message),
+      (addedBobbin) {
+        List<TaskBobina> list = List.from(state.listBobinas);
+        list.add(addedBobbin);
+        return state.updateTasks(list);
+      },
+    );
     emit(newState);
   }
 
-  Future<void> onUseFilter(
-      UseFilter event, Emitter<DataTableState> emit) async {
+  Future<void> onUseFilter(UseFilter event, Emitter<TasksState> emit) async {
     emit(state.load());
     final tasks = await tasksRepository.getTasks();
     final newState = tasks.fold(
@@ -54,8 +57,7 @@ class DataTableBloc extends Bloc<DataTableEvent, DataTableState> {
     emit(newState);
   }
 
-  Future<void> onDeleteTask(
-      DeleteTask event, Emitter<DataTableState> emit) async {
+  Future<void> onDeleteTask(DeleteTask event, Emitter<TasksState> emit) async {
     emit(state.load());
     final deletingTask = await tasksRepository.deleteTask(event.id);
     final newState = deletingTask.fold(

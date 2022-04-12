@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/constants.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
-import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
+import 'package:popper/screen/tasks/bloc/tasks_event.dart';
+import 'package:popper/screen/tasks/bloc/tasks_bloc.dart';
 import 'package:popper/widgets/field.dart';
 
 class NewTaskForm extends StatefulWidget {
@@ -103,9 +103,9 @@ class _NewTaskFormState extends State<NewTaskForm> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         print('button pressed');
-                        BlocProvider.of<DataTableBloc>(context)
+                        BlocProvider.of<TasksBloc>(context)
                           ..add(
-                            CreateNewTask(
+                            CreateTask(
                               nameOfTask: nameController.text,
                               numberOfTask: numberController.text,
                               totalNumber: int.parse(countController.text),

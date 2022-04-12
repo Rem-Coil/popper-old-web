@@ -24,7 +24,7 @@ class TaskRepository {
   Future<Either<Failure, TaskBobina>> addTask(AddedTask task) async {
     try {
       final service = await ApiProvider().getApiService();
-      final addedTask = await service.addTask(task.toJson());
+      final addedTask = await service.addTask(task);
       return Right(addedTask);
     } on DioError catch (e) {
       switch (e.response?.statusCode) {

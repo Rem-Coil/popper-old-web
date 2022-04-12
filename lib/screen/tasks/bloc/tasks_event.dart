@@ -1,28 +1,28 @@
 import 'package:flutter/foundation.dart';
 
 @immutable
-class DataTableEvent {}
+class TasksEvent {}
 
-class ShowDataTable extends DataTableEvent {}
+class GetTasks extends TasksEvent {}
 
-class CreateNewTask extends DataTableEvent {
+class CreateTask extends TasksEvent {
   final String nameOfTask;
   final String numberOfTask;
   final int totalNumber;
 
-  CreateNewTask(
+  CreateTask(
       {required this.nameOfTask,
       required this.numberOfTask,
       required this.totalNumber});
 }
 
-class UseFilter extends DataTableEvent {
+class UseFilter extends TasksEvent {
   final String filterWord;
 
   UseFilter({required this.filterWord});
 }
 
-class DeleteTask extends DataTableEvent {
+class DeleteTask extends TasksEvent {
   final int id;
 
   DeleteTask({required this.id});

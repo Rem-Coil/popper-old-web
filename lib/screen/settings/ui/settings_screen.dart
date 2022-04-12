@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:popper/screen/base/ui/base_mian%20screen.dart';
-import 'package:popper/widgets/network_settings.dart';
+import 'package:popper/screen/base/ui/base_main_screen.dart';
+import 'package:popper/screen/settings/ui/widgets/network_settings.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const route = '/settings';

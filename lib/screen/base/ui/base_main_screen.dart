@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:popper/constants.dart';
-import 'package:popper/widgets/navigation/route.dart';
 import 'package:popper/screen/base/ui/base_header.dart';
 import 'package:popper/widgets/navigation/navigation_controller.dart';
-import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
   final int screenIndex;
@@ -23,28 +21,25 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (BuildContext context) => RouteHolder(currentRoute),
-      child: Scaffold(
-        drawer: NavigationController(currentScreen: screenIndex),
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(child: NavigationController(currentScreen: screenIndex)),
-            Expanded(
-              flex: 5,
-              child: Container(
-                padding: EdgeInsets.all(defaultPadding),
-                child: Column(
-                  children: [
-                    _getHeader(),
-                    _getMainWidgetDecoration(context),
-                  ],
-                ),
+    return Scaffold(
+      drawer: NavigationController(currentScreen: screenIndex),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(child: NavigationController(currentScreen: screenIndex)),
+          Expanded(
+            flex: 5,
+            child: Container(
+              padding: EdgeInsets.all(defaultPadding),
+              child: Column(
+                children: [
+                  _getHeader(),
+                  _getMainWidgetDecoration(context),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

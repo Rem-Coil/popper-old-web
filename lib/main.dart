@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/constants.dart';
-import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
+import 'package:popper/screen/tasks/bloc/tasks_bloc.dart';
 import 'package:popper/screen/operators/bloc/operators_bloc.dart';
 import 'package:popper/screen/operators/ui/operators_screen.dart';
 import 'package:popper/screen/settings/ui/settings_screen.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => DataTableBloc()),
+        BlocProvider(create: (_) => TasksBloc()),
       ],
       child: MaterialApp(
         title: 'Popper',

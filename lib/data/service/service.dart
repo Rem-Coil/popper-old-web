@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:popper/models/action.dart';
+import 'package:popper/models/added_task.dart';
 import 'package:popper/models/bobbin_information.dart';
 import 'package:popper/models/model.dart';
 import 'package:popper/models/operator.dart';
@@ -15,7 +16,7 @@ abstract class Service {
   Future<List<TaskBobina>> getTable();
 
   @POST('/task')
-  Future<TaskBobina> addTask(@Body() Map<String, dynamic> map);
+  Future<TaskBobina> addTask(@Body() AddedTask map);
 
   @GET('/action/task/{id}')
   Future<List<Action>> getActions(@Path("id") int id);

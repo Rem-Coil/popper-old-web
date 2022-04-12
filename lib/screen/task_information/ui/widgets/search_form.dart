@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/tasks/bloc/dataTable_event.dart';
-import 'package:popper/screen/tasks/bloc/datatable_bloc.dart';
-import 'field.dart';
+import 'package:popper/screen/tasks/bloc/tasks_event.dart';
+import 'package:popper/screen/tasks/bloc/tasks_bloc.dart';
+import '../../../../widgets/field.dart';
 
 class SearchForm extends StatefulWidget {
   const SearchForm({Key? key}) : super(key: key);
@@ -17,8 +17,9 @@ class _SearchFormState extends State<SearchForm> {
 
   @override
   void initState() {
+    super.initState();
     searchingController.addListener(() {
-      BlocProvider.of<DataTableBloc>(context).add(
+      BlocProvider.of<TasksBloc>(context).add(
         UseFilter(filterWord: searchingController.text),
       );
     });

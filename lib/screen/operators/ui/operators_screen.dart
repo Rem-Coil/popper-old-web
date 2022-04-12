@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popper/screen/base/ui/base_mian%20screen.dart';
+import 'package:popper/screen/base/ui/base_main_screen.dart';
 import 'package:popper/screen/operators/bloc/operators_bloc.dart';
 import 'package:popper/screen/operators/bloc/operators_event.dart';
 import 'package:popper/screen/operators/bloc/operators_state.dart';
