@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:popper/core/error/failure.dart';
 import 'package:popper/data/task_information_repository.dart';
 import 'package:popper/models/action.dart';
 
+@singleton
 class DeleteDuplicateUseCase {
   final TaskInformationRepository taskInformationRepository;
 

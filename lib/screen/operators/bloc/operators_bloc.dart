@@ -1,13 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:popper/data/operator_repository.dart';
 import 'package:popper/models/operator.dart';
 import 'package:popper/screen/operators/bloc/operators_event.dart';
 import 'package:popper/screen/operators/bloc/operators_state.dart';
 
+@singleton
 class OperatorsBloc extends Bloc<OperatorsEvent, OperatorsState> {
-  final OperatorRepository operatorRepository = OperatorRepository();
+  final OperatorRepository operatorRepository;
 
-  OperatorsBloc() : super(OperatorsState.initial()) {
+  OperatorsBloc(this.operatorRepository) : super(OperatorsState.initial()) {
     on<ShowOperators>(onShowOperators);
     on<DeleteOperators>(onDeleteOperators);
   }

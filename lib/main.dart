@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popper/constants.dart';
+import 'package:popper/core/di/injection.dart';
 import 'package:popper/screen/tasks/bloc/tasks_bloc.dart';
 import 'package:popper/screen/operators/bloc/operators_bloc.dart';
 import 'package:popper/screen/operators/ui/operators_screen.dart';
@@ -8,6 +9,7 @@ import 'package:popper/screen/settings/ui/settings_screen.dart';
 import 'package:popper/screen/tasks/ui/tasks_screen.dart';
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => TasksBloc()),
+        BlocProvider(create: (_) => getIt<TasksBloc>()),
       ],
       child: MaterialApp(
         title: 'Popper',
@@ -37,9 +39,7 @@ class MyApp extends StatelessWidget {
               return PageRouteBuilder(
                 pageBuilder: (context, animation1, animation2) => BlocProvider(
                     child: OperatorsScreen(),
-                    create: (context) {
-                      return OperatorsBloc();
-                    }),
+                    create: (context) => getIt<OperatorsBloc>()),
                 transitionDuration: Duration(seconds: 0),
               );
             case SettingsScreen.route:

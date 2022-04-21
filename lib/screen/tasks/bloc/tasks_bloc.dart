@@ -1,14 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:popper/models/model.dart';
 import 'package:popper/screen/tasks/bloc/tasks_event.dart';
 import 'package:popper/screen/tasks/bloc/tasks_state.dart';
 import 'package:popper/models/added_task.dart';
 import 'package:popper/data/task_repository.dart';
 
+@singleton
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
-  final TaskRepository tasksRepository = TaskRepository();
+  final TaskRepository tasksRepository;
 
-  TasksBloc() : super(TasksState.initial()) {
+  TasksBloc(this.tasksRepository) : super(TasksState.initial()) {
     on<GetTasks>(onGetTasks);
     on<CreateTask>(onCreateTask);
     on<UseFilter>(onUseFilter);

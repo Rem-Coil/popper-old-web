@@ -1,14 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:popper/core/di/injection.dart';
 import 'package:popper/data/task_information_repository.dart';
 import 'package:popper/domain/actions_use_case.dart';
 import 'package:popper/models/final_info.dart';
 import 'package:popper/screen/task_information/bloc/task_information_event.dart';
 import 'package:popper/screen/task_information/bloc/task_information_state.dart';
 
+@singleton
 class TaskInformationBloc
     extends Bloc<TaskInformationEvent, TaskInformationState> {
   final TaskInformationRepository taskInformationRepository =
-      TaskInformationRepository();
+      getIt<TaskInformationRepository>();
 
   TaskInformationBloc() : super(TaskInformationState.initial()) {
     on<ShowTaskInformation>(onShowTaskInformationEvent);
@@ -21,7 +24,7 @@ class TaskInformationBloc
     emit(state.load());
     final bobbins =
         await taskInformationRepository.getBobbinInformation(event.id);
-    final deleteDuplicate = DeleteDuplicateUseCase(taskInformationRepository);
+    final deleteDuplicate = getIt<DeleteDuplicateUseCase>();
 
     final actions = await deleteDuplicate(event.id);
 

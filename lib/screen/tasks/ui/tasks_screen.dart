@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:popper/core/di/injection.dart';
 import 'package:popper/core/network/server_settings.dart';
 import 'package:popper/screen/base/ui/base_main_screen.dart';
 import 'package:popper/screen/tasks/bloc/tasks_event.dart';
@@ -117,7 +118,7 @@ class _TasksPageState extends State<TasksPage> {
                                       builder: (context) => BlocProvider(
                                           child: TasksDialog(id: bobina.id),
                                           create: (context) =>
-                                              TaskInformationBloc()));
+                                              getIt<TaskInformationBloc>()));
                                 },
                                 cells: <DataCell>[
                                   DataCell(Text(bobina.taskName)),
